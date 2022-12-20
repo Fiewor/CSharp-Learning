@@ -181,7 +181,7 @@ namespace Practice
             int[] another = new int[3];
             Array.Copy(numbers, another, 3);
 
-            Console.WriteLine("Effect of Copy(");
+            Console.WriteLine("Effect of Copy()");
             foreach(var n in another)
                 Console.WriteLine(n);
 
@@ -192,13 +192,49 @@ namespace Practice
             // Reverse()
             Array.Reverse(numbers);
 
+            // LISTS
+
             // Lists - atore objects of the same type just like an array, but it has DYNAMIC SIZE
             // created using the list generic type
                 // specify a generic pqarameter between the angle brackets e.g. int. 
             // this specifies the tpe of the list
             // you can create a list of any non-primitve types
-            var numbersList = new List<int>();
+            // var numbersList = new List<int>();
+
             // can use object initialization if you know in advance the items you want to put in your list
+            var numbersList = new List<int>() { 1, 2, 3, 4};
+            numbersList.Add(1);
+            numbersList.AddRange(new int[3] { 5, 6, 7 }); // a type prefixed with I is an interface
+
+            // TIP: whenever you see IENUMERABLE in the intellisense, you can use an array or a list
+
+            foreach(var number in numbersList)
+                Console.WriteLine(number);
+
+            Console.WriteLine();
+            Console.WriteLine("index of 1: " + numbersList.IndexOf(1));
+            Console.WriteLine("last index of 1: " + numbersList.LastIndexOf(1));
+
+            Console.WriteLine("count: " + numbers.Count());
+
+            foreach(var number in numbersList)
+            {
+                if (number == 1)
+                    numbersList.Remove(number); // this modifies the collection
+            // in C#, we're not allowed to modify our collection inside a foreach loop
+            }
+
+            for (int i = 0; i < numbersList.Count; i++)
+            {
+                if (numbersList[i] == 1)
+                    numbersList.Remove(numbersList[i]);
+            }
+
+            foreach (var number in numbersList)
+                Console.WriteLine(number);
+
+            numbersList.Clear(); 
+            // removes all elements from an array
         }
     }
 }
