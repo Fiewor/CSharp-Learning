@@ -143,8 +143,120 @@
         Console.WriteLine("Max is: " + max);
     }
 
+    // arrays and lists exercises
+    public static void ExerciseC1()
+    {
+        var friends = new List<string>();
+        while (true)
+        {
+            Console.WriteLine("Enter a name");
+            var str = Console.ReadLine();
+
+            if (str == "") 
+                break;
+            friends.Add(str);
+        }
+        if (friends.Count > 2)
+            Console.WriteLine(string.Format("{0}, {1} and {2} others like your post", friends[0], friends[1], friends.Count - 2));
+        if(friends.Count == 2)
+            Console.WriteLine(string.Format("{0} and {1} like your post", friends[0], friends[1]));
+        if (friends.Count == 1)
+            Console.WriteLine(string.Format("{0} likes your post", friends[0]));
+    }
+
+    public static void ExerciseC2()
+    {
+        Console.WriteLine("enter your name: ");
+        var name = Console.ReadLine();
+        var chara = new char[name.Length];
+        // test = "this is a test".Select(x => x.ToString()).ToArray();
+        for (var i = name.Length; i > 0; i--)
+        {
+            chara[name.Length - i] = name[i - 1];
+        }
+        Console.WriteLine(new string(chara));
+    }
+
+    public static void ExerciseC3()
+    {
+        var numbs = new List<int>();
+        while (numbs.Count < 5)
+        { 
+            Console.WriteLine(string.Format("Enter {0} numbers", 5 - numbs.Count));
+            var num = Convert.ToInt32(Console.ReadLine());
+            if(numbs.Contains(num))
+            {
+                Console.WriteLine("Number has been entered previously. Try again");
+                continue;
+            }
+            else
+            {
+                numbs.Add(num);
+            }
+         };
+        numbs.Sort();
+        foreach(var number in numbs)
+            Console.WriteLine(number);
+    }
+
+    public static void ExerciseC4()
+    {
+        var numbers = new List<int>();
+        while (true)
+        {
+            Console.WriteLine("Enter a number or type 'Quit' to exit");
+            var input = Console.ReadLine();
+            if (input.ToLower() == "quit") break;
+           
+            numbers.Add(Convert.ToInt32(input));
+        }
+
+        var unique = new List<int>();
+        foreach(var el in numbers)
+        {
+            if (!unique.Contains(el))
+                unique.Add(el);
+        }
+
+        Console.WriteLine("The unique elements are: ");
+        foreach (var item in unique)
+            Console.WriteLine(item);
+    }
+
+    public static void ExerciseC5() {
+
+        string[] elements;
+        while (true)
+        {
+            Console.WriteLine("Enter comma separated numbers: ");
+            var str = Console.ReadLine();
+
+            if (!String.IsNullOrWhiteSpace(str))
+            {
+                elements = str.Split(',');
+                if (elements.Length >= 5)
+                    break;
+            }
+
+            Console.WriteLine("Invalid List. Re-try");
+        }
+
+        var numbers = new List<int>();
+
+        foreach (var item in elements)
+            numbers.Add(Convert.ToInt32(item));
+
+        numbers.Sort();
+
+        Console.WriteLine("The 3 smallest numbers are: ");
+        for (int i = 0; i < 3; i++)
+        {
+            Console.WriteLine(numbers[i]);
+        }
+    }
+
     private static void Main(string[] args)
     {
-        Exercise9();
+        ExerciseC5();
     }
 }
