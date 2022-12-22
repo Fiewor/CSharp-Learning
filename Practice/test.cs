@@ -233,8 +233,66 @@ namespace Practice
             foreach (var number in numbersList)
                 Console.WriteLine(number);
 
-            numbersList.Clear(); 
+            numbersList.Clear();
             // removes all elements from an array
+
+            // DateTime
+            // represents an exact date and time value (a point in time)
+            var dateTime = new DateTime(2015, 1, 1);
+            var now = DateTime.Now;
+            var today = DateTime.Today;
+
+            Console.WriteLine("Hour: " + now.Hour);
+            Console.WriteLine("Minute: " + now.Minute);
+
+            // DateTime object is immutable
+            // use .Add* methods to modify them
+            var tomorrow = now.AddDays(1);
+            var yesterday = now.AddDays(-1);
+
+            var longDay = now.ToLongDateString();
+            var shortDay = now.ToShortDateString();
+            var longTime = now.ToLongTimeString();
+            var shortTime = now.ToShortTimeString();
+
+            var bothDayAndTime = now.ToString();
+            // or use with format specifier
+            var bothDayAndTime1 = now.ToString("yyyy-MM-dd HH:MM");
+
+            // Time Span - represents a length of time (a duration)
+            var timeSpan = new TimeSpan(1, 2, 3); // (hours, minutes, seconds)
+            // if you don't have the values for miutes and seconds, just pass in zeros
+            var timeSpan1 = new TimeSpan(1, 0, 0);
+
+            // clearer syntax
+            var timeSpan2 = TimeSpan.FromHours(1); // alternative to line 265
+
+            var start = DateTime.Now;
+            var end = DateTime.Now.AddMinutes(2);
+            var duration = end - start; // returns a timespan
+
+            // TimeSpan properties
+            var minutes = timeSpan.Minutes; // returns the minutes component of your time span object
+            var totalMinutes = timeSpan.TotalMinutes; // converts the time span object to mionutes
+
+            // timespan is also immutable just like dateteime
+
+            // add 8 minutes to the original timestamp
+            Console.WriteLine(timeSpan.Add(TimeSpan.FromMinutes(8)));
+
+            //subtract time
+            Console.WriteLine(timeSpan.Subtract(TimeSpan.FromMinutes(2)));
+
+            //ToString
+            Console.WriteLine("ToString: " + timeSpan.ToString());
+            // note that Console.WriteLine automatically calls ToString on any object passed to it
+
+            // Parse -> conversion from a string to timespan object
+            Console.WriteLine("Parse: " + TimeSpan.Parse("01:02:03"));
+
+            // both DateTime and TimeSpan are structs. 
+            // they're both immutable
+            // calling a method on them returns a new instance
         }
     }
 }
