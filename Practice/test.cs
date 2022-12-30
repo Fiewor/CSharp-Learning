@@ -31,7 +31,7 @@ namespace Practice
             // Console.WriteLine((ShippingMethod)methodId); // casting to an enum - this returns 'Express' based on the ShippingMethod enum above
 
             // tip: by default, Console.WriteLine() calls toString() on any value you pass to it.
-           //  Console.WriteLine(method.ToString());
+            //  Console.WriteLine(method.ToString());
 
             // string to enum
             // var methodName = "Express"; // say we need to convert (i.e. parse) this method name to a ShippingMethod Enum
@@ -87,7 +87,7 @@ namespace Practice
             // foreach (var number in numbers)
             // {
             //     Console.WriteLine(number);
-            
+
             // }
             while (true)
             {
@@ -112,7 +112,7 @@ namespace Practice
             // Random Class
             var random = new Random();
             // more improvement to line 120
-            
+
             const int passwordLength = 10;
             char[] buffer = new char[passwordLength];
             // instead of displaying each character in the console, we can store it in the buffer
@@ -174,7 +174,7 @@ namespace Practice
             // false for boolean array
             // null for boolean array
             Array.Clear(numbers, 0, 2);
-            foreach(var n in numbers)
+            foreach (var n in numbers)
                 Console.WriteLine(n);
 
             // Copy()
@@ -182,7 +182,7 @@ namespace Practice
             Array.Copy(numbers, another, 3);
 
             Console.WriteLine("Effect of Copy()");
-            foreach(var n in another)
+            foreach (var n in another)
                 Console.WriteLine(n);
 
             // Sort()
@@ -196,19 +196,19 @@ namespace Practice
 
             // Lists - atore objects of the same type just like an array, but it has DYNAMIC SIZE
             // created using the list generic type
-                // specify a generic pqarameter between the angle brackets e.g. int. 
+            // specify a generic pqarameter between the angle brackets e.g. int. 
             // this specifies the tpe of the list
             // you can create a list of any non-primitve types
             // var numbersList = new List<int>();
 
             // can use object initialization if you know in advance the items you want to put in your list
-            var numbersList = new List<int>() { 1, 2, 3, 4};
+            var numbersList = new List<int>() { 1, 2, 3, 4 };
             numbersList.Add(1);
             numbersList.AddRange(new int[3] { 5, 6, 7 }); // a type prefixed with I is an interface
 
             // TIP: whenever you see IENUMERABLE in the intellisense, you can use an array or a list
 
-            foreach(var number in numbersList)
+            foreach (var number in numbersList)
                 Console.WriteLine(number);
 
             Console.WriteLine();
@@ -217,11 +217,11 @@ namespace Practice
 
             Console.WriteLine("count: " + numbers.Count());
 
-            foreach(var number in numbersList)
+            foreach (var number in numbersList)
             {
                 if (number == 1)
                     numbersList.Remove(number); // this modifies the collection
-            // in C#, we're not allowed to modify our collection inside a foreach loop
+                                                // in C#, we're not allowed to modify our collection inside a foreach loop
             }
 
             for (int i = 0; i < numbersList.Count; i++)
@@ -293,6 +293,123 @@ namespace Practice
             // both DateTime and TimeSpan are structs. 
             // they're both immutable
             // calling a method on them returns a new instance
+
+            // Strings
+
+            // FORMATTING
+            // ToLower()
+            // ToUpper()
+            // Trim() - remove whitespace at the beginning or end of a string
+
+            // SEARCHING
+            // IndexOf()
+            // LastIndexOf()
+
+            // SUBSTRING
+            // Substring(startIndex) // retrieves al characters and returns everything from that point to the end of the string
+            // Substring(startIndex, length) // limit the number of characters to retrieve
+
+            // REPLACE
+            // Replace('a', 'b')
+
+            // NULL CHECKING
+            // String.IsNullOrEmpty(str)
+            // String.IsNullOrWhiteSpace(str)
+
+            // SPLITTING
+            // str.Split(' ') // split by word
+
+            // Converting strings to numbers
+            string s = "1234";
+            int i = int.Parse(s); // throws an exception if string is null or empty
+            int j = Convert.ToInt32(s); // if string is null or empty, it converts to default integer value i.e. 0
+
+            int n = 1234;
+            string s1 = i.ToString(); // "1234"
+            string s2 = i.ToString("C"); // format using format string e.g. using C (currency) to get "$1,234.00" 
+                                         // by default, this inserts a comma after every 4 digits and has 2 decimal places
+            string s3 = i.ToString("C0"); // 0 representing the number of decimal places you want (in this case, none) <- $1,234
+
+            // other format specifiers:
+            // d or D <- decimal
+            // e or E <- exponential
+            // f or F <- Fixed Point
+            // x or X <- Hexadecimal
+
+            // each method returns a new string cause strings are immutable
+            // you can chain methods
+            var fullName = "John Fiewor ";
+            Console.WriteLine("Trim and ToUppper: '{0}'", fullName.Trim().ToUpper());
+
+            // split into firstname and lastname
+            // using substring
+            var ind = fullName.IndexOf(' ');
+            var firstName = fullName.Substring(0, ind);
+            var lastName = fullName.Substring(ind + 1); // end not explicitly specified so it will automatically so it will use default behaviour
+
+            //using split
+            var names = fullName.Split(' '); // returns a string array
+            Console.WriteLine("FirstName: " + names[0]);
+            Console.WriteLine("LastName: " + names[1]);
+
+            fullName.Replace("John", "James");
+
+            if (String.IsNullOrEmpty(null)) // deosn't check for whitespace
+                Console.WriteLine("Invalid");
+            if (String.IsNullOrWhiteSpace(" "))
+                Console.WriteLine("Invalid"); // checks for whitespaces
+
+            var stri = "25";
+            // var age = Convert.ToInt32(stri);
+            // can use ToByte instead of ToInt32 when converting from str to number cause 1 byte is enough to represent anyone's age (no one can be older than 250)
+            var age = Convert.ToByte(stri);
+            Console.WriteLine(age);
+
+            // convert to string
+            float price = 29.95f;
+            price.ToString();
+
+            var sentence = "This is going to be a really really really really really really really long text";
+            StringUtility.SummarizeText(sentence, 25); // Class.Method
+
+            // StringBuilder
+            // defined in System.Text namespace
+            // represents a mutable string
+            // easy and fast to create and manipulate strings
+            // unlike String class, it's not optimised for searching
+            // no IndexOf(), LastIndexOf(). Contains(), StartsWith() etc..
+            // provides string manipulation methods
+            // append(), insert(), remove(), replace(), clear()
+
+            var builder = new StringBuilder();
+            // or specify a starting string
+            var builder1 = new StringBuilder("Hello World");
+            builder.Append('-', 10); // repeat '-' 10 times
+            builder.AppendLine(); // apends a new line
+            builder.Append("Header");
+            builder.AppendLine();
+            builder.Append('-', 10);
+
+            builder.Replace('-', '+');
+
+            builder.Remove(0, 10); // removes first 10 characters
+
+            builder.Insert(0, new string('-', 10));
+
+            // you can use an indexer to access individual characters in the string builder (just like in a string)
+            Console.WriteLine("First Char" + builder[0]);
+
+            // NOTE: we can chain the Append methods since they return a NEW StringBuilder
+            // so, lines 387 - 397 can be re-written as:
+            builder1
+                .Append('-', 10) // repeat '-' 10 times
+                .AppendLine() // apends a new line
+                .Append("Header")
+                .AppendLine()
+                .Append('-', 10)
+                .Replace('-', '+')
+                .Remove(0, 10) // removes first 10 characters
+                .Insert(0, new string('-', 10));
         }
     }
 }
