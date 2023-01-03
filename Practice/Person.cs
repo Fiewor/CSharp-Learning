@@ -1,6 +1,4 @@
-﻿using Practice.Math;
-
-namespace Practice
+﻿namespace Practice
 {
 
     // can't create a class inside the Main methos cause it's a function/method

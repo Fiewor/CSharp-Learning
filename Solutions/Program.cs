@@ -1,6 +1,4 @@
-﻿using System.Text;
-
-public class Program
+﻿public class Program
 {
 
     public static void Exercise1()
@@ -11,7 +9,8 @@ public class Program
         Console.WriteLine(result);
     }
 
-    public static void Exercise2() {
+    public static void Exercise2()
+    {
         Console.WriteLine("Type first number");
         var num1 = Convert.ToInt32(Console.ReadLine());
         Console.WriteLine("Type second number");
@@ -95,18 +94,20 @@ public class Program
         Console.WriteLine("sum is: " + sum);
     }
 
-    public static void Exercise7() {
+    public static void Exercise7()
+    {
         Console.WriteLine("Enter a number: ");
         var num = Convert.ToInt32(Console.ReadLine());
         var fact = 1;
-        for(int i = num; i > 0; i--)
+        for (int i = num; i > 0; i--)
         {
             fact *= i;
         }
         Console.WriteLine(string.Format("Factorial of {0} is {1}", num, fact));
     }
 
-    public static void Exercise8() { 
+    public static void Exercise8()
+    {
         var random = new Random();
         var rand = random.Next(1, 11);
 
@@ -160,7 +161,7 @@ public class Program
         }
         if (friends.Count > 2)
             Console.WriteLine(string.Format("{0}, {1} and {2} others like your post", friends[0], friends[1], friends.Count - 2));
-        if(friends.Count == 2)
+        if (friends.Count == 2)
             Console.WriteLine(string.Format("{0} and {1} like your post", friends[0], friends[1]));
         if (friends.Count == 1)
             Console.WriteLine(string.Format("{0} likes your post", friends[0]));
@@ -186,7 +187,7 @@ public class Program
         {
             Console.WriteLine(string.Format("Enter {0} numbers", 5 - numbs.Count));
             var num = Convert.ToInt32(Console.ReadLine());
-            if(numbs.Contains(num))
+            if (numbs.Contains(num))
             {
                 Console.WriteLine("Number has been entered previously. Try again");
                 continue;
@@ -197,7 +198,7 @@ public class Program
             }
         };
         numbs.Sort();
-        foreach(var number in numbs)
+        foreach (var number in numbs)
             Console.WriteLine(number);
     }
 
@@ -214,7 +215,7 @@ public class Program
         }
 
         var unique = new List<int>();
-        foreach(var el in numbers)
+        foreach (var el in numbers)
         {
             if (!unique.Contains(el))
                 unique.Add(el);
@@ -225,7 +226,8 @@ public class Program
             Console.WriteLine(item);
     }
 
-    public static void ExerciseC5() {
+    public static void ExerciseC5()
+    {
 
         string[] elements;
         while (true)
@@ -280,16 +282,16 @@ public class Program
         Console.WriteLine("Consecutive");
     }
 
-    public static void ExerciseD2() 
+    public static void ExerciseD2()
     {
         Console.WriteLine("Enter numbers seperated by hyphen e.g. 1-2-3-4");
         var input = Console.ReadLine();
-        if(String.IsNullOrWhiteSpace(input)) return;
+        if (String.IsNullOrWhiteSpace(input)) return;
 
         var numbers = input.Split('-');
         foreach (var num in numbers)
         {
-            if(Array.IndexOf(numbers, num) != Array.LastIndexOf(numbers, num))
+            if (Array.IndexOf(numbers, num) != Array.LastIndexOf(numbers, num))
             {
                 Console.WriteLine("Duplicate");
                 return;
@@ -308,7 +310,7 @@ public class Program
             return;
         }
         var arr = input.Split(":");
-        if(arr.Length != 2)
+        if (arr.Length != 2)
         {
             Console.WriteLine("Invalid Time");
             return;
@@ -331,13 +333,13 @@ public class Program
         var pascalized = "";
         foreach (var word in words)
         {
-            var firstUpper = char.ToUpper(word[0]) + word.ToLower().Substring(1) ;
+            var firstUpper = char.ToUpper(word[0]) + word.ToLower().Substring(1);
             pascalized += firstUpper;
         }
         Console.WriteLine(pascalized);
 
     }
-    
+
     public static void ExerciseD5()
     {
         Console.WriteLine("Enter an English word");
@@ -349,7 +351,7 @@ public class Program
         }
         // var vowels = "aeiou";
         // or use a char list instead of a string
-        var vowels = new List<char>(new char[] {'a', 'e', 'i', 'o', 'u'});
+        var vowels = new List<char>(new char[] { 'a', 'e', 'i', 'o', 'u' });
         var word = input.ToLower();
         var vowelCount = 0;
         foreach (var letter in word)

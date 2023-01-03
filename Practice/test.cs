@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Text;
 
 
 namespace Practice
 
-    // ENUMS
+// ENUMS
 {
     // enum is a new type so we define it at the namesapce level
     public enum ShippingMethod
@@ -15,9 +11,9 @@ namespace Practice
         RegularAirMail = 1,
         RegisteredAirMail = 2,
         Express = 3
-            // if you don't set any values for the members of this enum, the first member is going to be automatically set to 0
-            // and every other member's value will be incrememnted by 1
-            // best practice: always explicitly set values for enums 
+        // if you don't set any values for the members of this enum, the first member is going to be automatically set to 0
+        // and every other member's value will be incrememnted by 1
+        // best practice: always explicitly set values for enums 
     }
     internal class test
     {

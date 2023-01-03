@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Practice
+﻿namespace Practice
 {
     internal class conditional
     {
