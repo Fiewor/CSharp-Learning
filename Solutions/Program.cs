@@ -1,4 +1,6 @@
-﻿public class Program
+﻿using System.Text;
+
+public class Program
 {
 
     public static void Exercise1()
@@ -28,7 +30,7 @@
         var result = width > height ? ImageOrientation.Landscape : ImageOrientation.Portrait;
     }
     public enum ImageOrientation
-    { 
+    {
         Landscape,
         Portrait
     }
@@ -107,7 +109,7 @@
     public static void Exercise8() { 
         var random = new Random();
         var rand = random.Next(1, 11);
-        
+
         for (int i = 0; i < 4; i++)
         {
             Console.WriteLine("Guess the secret number");
@@ -119,7 +121,7 @@
                 return;
             }
         }
-        Console.WriteLine(string.Format("You lost. The secret number was {0}", rand));     
+        Console.WriteLine(string.Format("You lost. The secret number was {0}", rand));
     }
 
     public static void Exercise9()
@@ -137,7 +139,7 @@
         foreach (var stri in arr)
         {
             var num = Convert.ToInt32(stri);
-            if (num > max) 
+            if (num > max)
                 max = num;
         }
         Console.WriteLine("Max is: " + max);
@@ -152,7 +154,7 @@
             Console.WriteLine("Enter a name");
             var str = Console.ReadLine();
 
-            if (str == "") 
+            if (str == "")
                 break;
             friends.Add(str);
         }
@@ -181,7 +183,7 @@
     {
         var numbs = new List<int>();
         while (numbs.Count < 5)
-        { 
+        {
             Console.WriteLine(string.Format("Enter {0} numbers", 5 - numbs.Count));
             var num = Convert.ToInt32(Console.ReadLine());
             if(numbs.Contains(num))
@@ -193,7 +195,7 @@
             {
                 numbs.Add(num);
             }
-         };
+        };
         numbs.Sort();
         foreach(var number in numbs)
             Console.WriteLine(number);
@@ -207,7 +209,7 @@
             Console.WriteLine("Enter a number or type 'Quit' to exit");
             var input = Console.ReadLine();
             if (input.ToLower() == "quit") break;
-           
+
             numbers.Add(Convert.ToInt32(input));
         }
 
@@ -255,8 +257,110 @@
         }
     }
 
+    // STRINGS
+    public static void ExerciseD1()
+    {
+        Console.WriteLine("Enter numbers seperated by hyphen");
+        var input = Console.ReadLine();
+        if (input == null) return;
+        var arr = input.Split('-');
+        for (int i = 0; i < arr.Length - 1; i++)
+        {
+            var curr = Convert.ToInt32(arr[i]);
+            var next = Convert.ToInt32(arr[i + 1]);
+            var diff = curr - next;
+            if (diff == -1 || diff == 1)
+                continue;
+            else
+            {
+                Console.WriteLine("Not Consecutive");
+                return;
+            }
+        }
+        Console.WriteLine("Consecutive");
+    }
+
+    public static void ExerciseD2() 
+    {
+        Console.WriteLine("Enter numbers seperated by hyphen e.g. 1-2-3-4");
+        var input = Console.ReadLine();
+        if(String.IsNullOrWhiteSpace(input)) return;
+
+        var numbers = input.Split('-');
+        foreach (var num in numbers)
+        {
+            if(Array.IndexOf(numbers, num) != Array.LastIndexOf(numbers, num))
+            {
+                Console.WriteLine("Duplicate");
+                return;
+            }
+        }
+        Console.WriteLine("No Duplicate"); // wasn't part of the exercise
+    }
+
+    public static void ExerciseD3()
+    {
+        Console.WriteLine("Enter a time value in the 24-hour time format (e.g. 19:00)");
+        var input = Console.ReadLine();
+        if (String.IsNullOrEmpty(input))
+        {
+            Console.WriteLine("Invalid Time");
+            return;
+        }
+        var arr = input.Split(":");
+        if(arr.Length != 2)
+        {
+            Console.WriteLine("Invalid Time");
+            return;
+        }
+        var hours = Convert.ToInt32(arr[0]);
+        var minutes = Convert.ToInt32(arr[1]);
+        if (hours >= 0 && hours <= 23 && minutes >= 0 && minutes <= 59)
+            Console.WriteLine("Ok");
+        else
+            Console.WriteLine("Invalid Time");
+    }
+
+    public static void ExerciseD4()
+    {
+        Console.WriteLine("Enter a few words separated by a space");
+        var input = Console.ReadLine();
+        if (String.IsNullOrWhiteSpace(input)) return;
+
+        var words = input.Split(" ");
+        var pascalized = "";
+        foreach (var word in words)
+        {
+            var firstUpper = char.ToUpper(word[0]) + word.ToLower().Substring(1) ;
+            pascalized += firstUpper;
+        }
+        Console.WriteLine(pascalized);
+
+    }
+    
+    public static void ExerciseD5()
+    {
+        Console.WriteLine("Enter an English word");
+        var input = Console.ReadLine();
+        if (String.IsNullOrWhiteSpace(input))
+        {
+            Console.WriteLine("Error");
+            return;
+        }
+        // var vowels = "aeiou";
+        // or use a char list instead of a string
+        var vowels = new List<char>(new char[] {'a', 'e', 'i', 'o', 'u'});
+        var word = input.ToLower();
+        var vowelCount = 0;
+        foreach (var letter in word)
+        {
+            if (vowels.Contains(letter))
+                vowelCount++;
+        }
+        Console.WriteLine(vowelCount);
+    }
     private static void Main(string[] args)
     {
-        ExerciseC5();
+        ExerciseD5();
     }
 }
