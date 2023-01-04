@@ -406,6 +406,11 @@ namespace Practice
                 .Replace('-', '+')
                 .Remove(0, 10) // removes first 10 characters
                 .Insert(0, new string('-', 10));
+
+            // procedural programming
+            // a programming paradigm based on procedure (functions, methods, routines, subroutines) calls
+
+            // always seperate the code that runs in the console from the code that implements some logic
         }
     }
 }
