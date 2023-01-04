@@ -259,13 +259,8 @@
         }
     }
 
-    // STRINGS
-    public static void ExerciseD1()
+    public static string IsConsecutive(string[] arr)
     {
-        Console.WriteLine("Enter numbers seperated by hyphen");
-        var input = Console.ReadLine();
-        if (input == null) return;
-        var arr = input.Split('-');
         for (int i = 0; i < arr.Length - 1; i++)
         {
             var curr = Convert.ToInt32(arr[i]);
@@ -274,12 +269,31 @@
             if (diff == -1 || diff == 1)
                 continue;
             else
-            {
-                Console.WriteLine("Not Consecutive");
-                return;
-            }
+                return "Not Consecutive";
         }
-        Console.WriteLine("Consecutive");
+        return "Consecutive";
+    }
+
+    // STRINGS
+    public static void ExerciseD1()
+    {
+        Console.WriteLine("Enter numbers seperated by hyphen");
+        var input = Console.ReadLine();
+
+        if (String.IsNullOrWhiteSpace(input)) return;
+
+        var arr = input.Split('-');
+        Console.WriteLine(IsConsecutive(arr));
+    }
+
+    public static string ContainsDuplicate(string[] numbers)
+    {
+        foreach (var num in numbers)
+        {
+            if (Array.IndexOf(numbers, num) != Array.LastIndexOf(numbers, num))
+                return "Duplicate";
+        }
+        return "No Duplicate";
     }
 
     public static void ExerciseD2()
@@ -289,15 +303,22 @@
         if (String.IsNullOrWhiteSpace(input)) return;
 
         var numbers = input.Split('-');
-        foreach (var num in numbers)
+        Console.WriteLine(ContainsDuplicate(numbers));
+    }
+
+    public static string IsValidTime(string time)
+    {
+        var arr = time.Split(":");
+        if (arr.Length != 2)
         {
-            if (Array.IndexOf(numbers, num) != Array.LastIndexOf(numbers, num))
-            {
-                Console.WriteLine("Duplicate");
-                return;
-            }
+            return "Invalid Time";
         }
-        Console.WriteLine("No Duplicate"); // wasn't part of the exercise
+        var hours = Convert.ToInt32(arr[0]);
+        var minutes = Convert.ToInt32(arr[1]);
+        if (hours >= 0 && hours <= 23 && minutes >= 0 && minutes <= 59)
+            return "Ok";
+        else
+            return "Invalid Time";
     }
 
     public static void ExerciseD3()
@@ -309,18 +330,19 @@
             Console.WriteLine("Invalid Time");
             return;
         }
-        var arr = input.Split(":");
-        if (arr.Length != 2)
+        Console.WriteLine(IsValidTime(input));
+    }
+
+    public static string ConvertToPascalCase(string input)
+    {
+        var words = input.Split(" ");
+        var res = "";
+        foreach (var word in words)
         {
-            Console.WriteLine("Invalid Time");
-            return;
+            var firstUpper = char.ToUpper(word[0]) + word.ToLower().Substring(1);
+            res += firstUpper;
         }
-        var hours = Convert.ToInt32(arr[0]);
-        var minutes = Convert.ToInt32(arr[1]);
-        if (hours >= 0 && hours <= 23 && minutes >= 0 && minutes <= 59)
-            Console.WriteLine("Ok");
-        else
-            Console.WriteLine("Invalid Time");
+        return res;
     }
 
     public static void ExerciseD4()
@@ -329,15 +351,21 @@
         var input = Console.ReadLine();
         if (String.IsNullOrWhiteSpace(input)) return;
 
-        var words = input.Split(" ");
-        var pascalized = "";
-        foreach (var word in words)
-        {
-            var firstUpper = char.ToUpper(word[0]) + word.ToLower().Substring(1);
-            pascalized += firstUpper;
-        }
-        Console.WriteLine(pascalized);
+        Console.WriteLine(ConvertToPascalCase(input));
+    }
 
+    public static int VowelCount(string word)
+    {
+        // var vowels = "aeiou";
+        // or use a char list instead of a string
+        var vowels = new List<char>(new char[] { 'a', 'e', 'i', 'o', 'u' });
+        var count = 0;
+        foreach (var letter in word)
+        {
+            if (vowels.Contains(letter))
+                count++;
+        }
+        return count;
     }
 
     public static void ExerciseD5()
@@ -349,17 +377,8 @@
             Console.WriteLine("Error");
             return;
         }
-        // var vowels = "aeiou";
-        // or use a char list instead of a string
-        var vowels = new List<char>(new char[] { 'a', 'e', 'i', 'o', 'u' });
         var word = input.ToLower();
-        var vowelCount = 0;
-        foreach (var letter in word)
-        {
-            if (vowels.Contains(letter))
-                vowelCount++;
-        }
-        Console.WriteLine(vowelCount);
+        Console.WriteLine(VowelCount(word));
     }
     private static void Main(string[] args)
     {
