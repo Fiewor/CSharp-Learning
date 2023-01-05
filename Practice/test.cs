@@ -409,8 +409,30 @@ namespace Practice
 
             // procedural programming
             // a programming paradigm based on procedure (functions, methods, routines, subroutines) calls
-
             // always seperate the code that runs in the console from the code that implements some logic
+            
+            // WORKING WITH FILES
+
+            // System.IO namespace - where classes for working with files and directories are located
+
+            // File, FileInfo -> provides methods for creating, copying, deleting, moving and opening of files
+            // both similar interfaces
+            // DIFFERENCES
+            // file - static methods - useful if you have few number of operations e.g. get attributes about a file
+            // problem with static method: every time you call a static method, OS does some security checking to make sure user has access to the file
+            // this will affect performance if you have large number of operations
+
+            // FileInfo - instance methods - better for large operations
+            // security checking is done only once during creation of a fileInfo object
+            // METHODS ->Create, Copy, Delete, Exists, GetAttibutes, Move, ReadAllText
+
+            // Directory, DirectoryInfo - similar to File, FileInfo but fir directories 
+            // Directory - provides static methods
+            // DirectoryInfo - provides instance methods
+            // METHODS => CreateDirectory, Delete, Exists, GetCurrentDirectory, GetFiles, Move, GetLogicalDrives
+
+            // Path -  provides methods to work with a string that contains a file or directory path information
+            // METHODS - GetDirectoryName, GetFileName, GetExtension, GetTempPath
         }
     }
 }
