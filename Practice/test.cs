@@ -410,7 +410,7 @@ namespace Practice
             // procedural programming
             // a programming paradigm based on procedure (functions, methods, routines, subroutines) calls
             // always seperate the code that runs in the console from the code that implements some logic
-            
+
             // WORKING WITH FILES
 
             // System.IO namespace - where classes for working with files and directories are located
@@ -424,7 +424,7 @@ namespace Practice
 
             // FileInfo - instance methods - better for large operations
             // security checking is done only once during creation of a fileInfo object
-            // METHODS ->Create, Copy, Delete, Exists, GetAttibutes, Move, ReadAllText
+            // METHODS -> Create, Copy, Delete, Exists, GetAttibutes, Move, ReadAllText
 
             // Directory, DirectoryInfo - similar to File, FileInfo but fir directories 
             // Directory - provides static methods
@@ -433,6 +433,74 @@ namespace Practice
 
             // Path -  provides methods to work with a string that contains a file or directory path information
             // METHODS - GetDirectoryName, GetFileName, GetExtension, GetTempPath
+
+            // WORKING WITH FILES
+            var path = @"C:\Users\Public\temp\mlh_tweet.png";
+            var file_path = @"C:\Users\Public\text.txt";
+            // File.Copy("C:\\Users\\Public\\mlh_tweet.png", "C:\\Users\\Public\\temp\\mlh_tweet.png", true);
+            // or use a verbatim string so there would be no need for double backslashes
+            File.Copy(@"C:\Users\Public\mlh_tweet.png", @"C:\Users\Public\temp\mlh_tweet.png", true);
+            File.Delete(path);
+            if (File.Exists(file_path))
+            {
+                Console.WriteLine("File exists");
+                Console.WriteLine("Reading file....");
+                Console.WriteLine();
+                var text = File.ReadAllText(file_path);
+                Console.WriteLine("Read result: " + text);
+                // File.ReadAllBytes // <- to read file as a binary
+            }
+            else
+            {
+                Console.WriteLine("File doesn't exist");
+            }
+            // remember, fileInfo is better for large applications cause it provides instance methods as opposed to File which uses static methods
+            var fileInfo = new FileInfo(file_path);
+            // fileInfo.CopyTo();
+            // fileInfo.Delete();
+            // fileInfo.Exists();
+
+            // DIRECTORIES
+            Console.WriteLine("Creating directory...");
+            Directory.CreateDirectory(@"C:\Users\Public\temp\folder2");
+            Console.WriteLine("Directory created...");
+
+            // var files = Directory.GetFiles(@"C:\Users\Public\temp\folder2", "*", SearchOption.AllDirectories);
+            var directory_path = @"C:\Users\John Fiewor\OneDrive\Documents\Code";
+            var files = Directory.GetFiles(directory_path, "*.js", SearchOption.AllDirectories);
+            foreach (var file in files)
+            {
+                Console.WriteLine("File: " + file);
+            }
+
+            var directories = Directory.GetDirectories(directory_path, "*.*", SearchOption.AllDirectories);
+            foreach (var directory in directories)
+            {
+                Console.WriteLine("directory: " + directory);
+            }
+            // Directory.Exists();
+
+            // var directory = new DirectoryInfo(path);
+            // directoryInfo.GetFiles();
+            // directoryInfo.GetDirectories();
+
+            // PATH CLASS
+            // provides methods that make it easy to work with a string that represents a path and extract different parts of that path
+            var new_path = @"";
+
+            // get extension
+            // poor way
+            var dotIndex = new_path.IndexOf('.');
+            var extension = new_path.Substring(dotIndex);
+            Console.WriteLine(extension);
+
+            // better way
+            Console.WriteLine("Extension: " + Path.GetExtension(new_path));
+
+            // other useful methods
+            Console.WriteLine("File Name: " + Path.GetFileName(new_path));
+            Console.WriteLine("File Name without extension: " + Path.GetFileNameWithoutExtension(new_path));
+            Console.WriteLine("Directory Name: " + Path.GetDirectoryName(new_path));
         }
     }
 }
