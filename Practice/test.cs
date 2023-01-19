@@ -501,6 +501,33 @@ namespace Practice
             Console.WriteLine("File Name: " + Path.GetFileName(new_path));
             Console.WriteLine("File Name without extension: " + Path.GetFileNameWithoutExtension(new_path));
             Console.WriteLine("Directory Name: " + Path.GetDirectoryName(new_path));
+
+            // DEBUGGING
+
+            // debugging process
+                // put one or more breakpoints in your code
+                // run the app in debug mode
+                // continue execution 
+                // inspect values of different variables 
+
+            // F10 - step over
+            // F11 - step into
+            // Shift + F11 - step into
+
+            // F5 - run in debug mode
+            // shift + F5 - stop the debug mode
+            // ctrl + F5 - run without degbugging
+
+            // F9 - insert breakpoint at current line
+
+            // defensive programming - handling errors and edgecases preemptively by checking the input first before doing any processing
+            // side effects make your methods unreliable and introduce hard-to-find bugs
+
+            // watch - monitor specific values and how they change as the code runs
+
+            // call stack - shows order in which calls are made including the respective methods that were called
+            // auto window - like watch but with an automatic list of variables auto-detected by VS based on where you are in the code
+            // local window - only shows variables in the local scope
         }
     }
 }
