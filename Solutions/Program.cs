@@ -1,4 +1,5 @@
-﻿using System.Net.NetworkInformation;
+﻿using Solutions;
+using System.Net.NetworkInformation;
 
 public class Program
 {
@@ -382,14 +383,6 @@ public class Program
         var word = input.ToLower();
         Console.WriteLine(VowelCount(word));
     }
-    private static void Main(string[] args)
-    {
-        var numbers = new List<int> { 1, 2, 3, 4, 5 };
-        var smallests = GetSmallests(numbers, 3);
-
-        foreach (var number in smallests)
-            Console.WriteLine(number); 
-    }
 
     public static List<int> GetSmallests(List<int> list, int count)
     {
@@ -401,7 +394,7 @@ public class Program
         var buffer = new List<int>(list);
         var smallests = new List<int>();
 
-        while(smallests.Count < count)
+        while (smallests.Count < count)
         {
             var min = GetSmallest(buffer);
             smallests.Add(min);
@@ -419,5 +412,38 @@ public class Program
                 min = list[i];
         }
         return min;
+    }
+
+    public class Person
+    {
+        public string Name;
+        public void Introduce(string to)
+        {
+            Console.WriteLine("Hi {0}, I am {1}", to, Name);
+        }
+    }
+
+    public class Order
+    {
+
+    }
+
+    private static void Main(string[] args)
+    {
+        // var numbers = new List<int> { 1, 2, 3, 4, 5 };
+        // var smallests = GetSmallests(numbers, 3);
+        // foreach (var number in smallests)
+        //      Console.WriteLine(number); 
+
+        var customer = new Customer(1, "John");
+        Console.WriteLine(customer.Id);
+        Console.WriteLine(customer.Name);
+
+        var order = new Order();
+        customer.order.Add(order);
+
+        // var person = new Person();
+        // person.Name = "John";
+        // person.Introduce("Mosh");
     }
 }

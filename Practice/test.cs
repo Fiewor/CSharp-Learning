@@ -505,10 +505,10 @@ namespace Practice
             // DEBUGGING
 
             // debugging process
-                // put one or more breakpoints in your code
-                // run the app in debug mode
-                // continue execution 
-                // inspect values of different variables 
+            // put one or more breakpoints in your code
+            // run the app in debug mode
+            // continue execution 
+            // inspect values of different variables 
 
             // F10 - step over
             // F11 - step into
@@ -528,6 +528,53 @@ namespace Practice
             // call stack - shows order in which calls are made including the respective methods that were called
             // auto window - like watch but with an automatic list of variables auto-detected by VS based on where you are in the code
             // local window - only shows variables in the local scope
+
+
+            // CLASSES
+            // Applications typically consist of multiple classes (building blocks) each responsible for a particular behaviour in the app
+
+            // Sample blog post app
+            // Layered architecture - consists of 3 layers:
+            // Presentation (PostView class - responsible for displaying a post to a user )
+            // Business Logic/Domain (Post class)
+            // Data Access / Persistence (Post Repository - save/load to/from database)
+            // we can have classes in each of these layers that would be responsible for particular tasks
+
+            // anatomy
+            // -> data - fields
+            // -> behaviour - methods/functions
+
+            // Unified Modelling Language (UML) - graphical language for communicating classes.
+            // Consists of name of class, class fields, and class methods.
+
+            // OBJECT is an instance of a class that resides in memory.
+            // A class defines a blueprint from which you can create an object.
+
+            // classes are named using Pascal Case (also used for parameters of methods)
+            // the fields and methods of a class are the classes' MEMBERS
+
+            // there are two types of class members
+            // 1. instance: accessible from an object
+            // Example:
+            // var person = new Person();
+            // person.Introduce();
+
+            // 2. static: accessible from the class (not an object)
+            // Example: Console.Writeline(); DateTime.Now();
+            // use static members to represent concepts that are singleton i.e. we should have only one instance of that concept in the memory
+
+            // var person = new Person();
+            // var p = person.parse("John"); // returns a Person object
+
+            // or Person person  = new Person
+            // person.Name = "john";
+            // person.Introduce("Jane");
+
+            // when parse is declared as a static method, you no longer have to create a person object first in other to parse a stringvar
+            // var person = Person.parse("John");
+            // person.Introduce("John");
+
+
         }
     }
 }
