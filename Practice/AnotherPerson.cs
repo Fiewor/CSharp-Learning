@@ -12,7 +12,7 @@
             Increment(number);
             // Console.WriteLine(number); // results in 1
 
-            var person = new Person() { Age = 20 };
+            var person = new AnotherPerson() { age = 20 };
             // this person and the person we have as a parameter to the MakeOld will be pointing to the same object on the heap
             // that is because the type of the MakeOld method parameter is a reference type
             // Console.WriteLine(person.Age);
@@ -22,9 +22,9 @@
         {
             number += 10;
         }
-        public static void MakeOld(Person person)
+        public static void MakeOld(AnotherPerson person)
         {
-            person.Age += 10;
+            person.age += 10;
         }
     }
 }

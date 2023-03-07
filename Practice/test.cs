@@ -112,8 +112,8 @@ namespace Practice
             const int passwordLength = 10;
             char[] buffer = new char[passwordLength];
             // instead of displaying each character in the console, we can store it in the buffer
-            for (int i = 0; i < passwordLength; i++)
-            {
+            // for (int i = 0; i < passwordLength; i++)
+            //{
                 // Console.WriteLine(random.Next());
                 //Console.Write((char)random.Next(97, 122)); // return a random number in the ascii range for lowercase letters THEN cast to integer TO generate a random string 
                 // note: uses Console.Write so that there's no line break
@@ -122,9 +122,9 @@ namespace Practice
                 // Console.Write((char)('a' +  random.Next(0, 26)));
                 // this works cause 'a' is represented internally as a number and adding that character to a number RESULTS in a number
 
-                buffer[i] = (char)('a' + random.Next(0, 26));
+                //buffer[i] = (char)('a' + random.Next(0, 26));
 
-            }
+            //}
             var password = new string(buffer);
             Console.WriteLine(password);
             // Console.WriteLine((int)'a'); // will return 97
@@ -170,8 +170,8 @@ namespace Practice
             // false for boolean array
             // null for boolean array
             Array.Clear(numbers, 0, 2);
-            foreach (var n in numbers)
-                Console.WriteLine(n);
+            //foreach (var n in numbers)
+                //Console.WriteLine(n);
 
             // Copy()
             int[] another = new int[3];
@@ -575,6 +575,84 @@ namespace Practice
             // person.Introduce("John");
 
 
+            // OBJECT INITIALIZERS
+            // you use constructors to initialize an object and put it in an early state
+            // there's another way to initalize an object - object initializer
+            // object initializer is a syntax for quickly initializing an object without the need to call one of its constructors
+            // useful to avoid creating multiple constructors
+
+            // example of object initialization syntax:
+            var person = new Person
+            {
+                FirstName = "John",
+                LastName = "Fiewor"
+            };
+
+            // basically, you specify the name of the propertirs and assign them values
+            // behind the scenes, the default/parameterless constructor is called and any property you set here is going to be initialized
+            // so, this way ,you only use constructor when you really need to use them
         }
+
+        // METHODS
+        // a mthod with varying number of parameters using method overloading
+        public class Calculator
+        {
+            // this is not an efficeient way to overload the Add method
+            // public int Add(int n1, int n2) { }
+            // public int Add(int n1, int n2, int n3) { }
+            // public int Add(int n1, int n2, int n3, int n4) { }
+
+            // a better way
+            // public int Add(int[] numbers) { }
+            // problem with this is that you would have to create an initialize an array anytime you want to pass a number of arguments to this method
+
+            // much better way - params modifier
+            // useful in situation where your method might need a varying number of parameters. makes it easier for the consumer of that method to call that method
+            //public int Add(params int[] numbers) { }
+
+        }
+
+        // var result = calculator.Add(new int[] { 1, 2, 3, 4 }); // traditional form
+        // thanks to params modifier in args() on line 611, you can use params modifier like done below:
+        // var result = calculator.Add(1, 2, 3, 4); // you don't need to create and initialize an array when using params modifier
+        // useful when your method might need a varying number of parameters
+
+        // the ref modifier
+        //public class MyClass
+        //{
+        //    //public void MyMethod(int a)
+        //    public void MyMethod(ref int a)
+        //    {
+        //        a += 2;
+        //    }
+        //}
+
+        // var a = 1;
+        // MyClass.MyMethod(a);
+
+        // the original 'a' variable won't be changed because the method will create and work on a local copy of 'a'
+
+        // you can change this behaviour by adding 'ref' keyword before the parameters (line 624)
+        // you can now use the method as shown below
+        // MyClass.MyMethod(ref a);
+        // in this case, the original 'a' will be passed to the method and hence be modified after returning from the method
+
+        // the out modifier -> returns a value to the caller 
+        // we can have mutliple parameters, and they all can return a value to the caller
+        // this is a 'code smell' because if a method is to return mutliple values to the caller, it is better to encapsulate all these values into a specific class which could be the return type of that method
+
+        // example of using the out modifier
+        //public class MyClass
+        //{
+        //    public void MyMethod(out int result)
+        //    {
+        //        result = 1;
+        //    }
+        //}
+
+        //int a;
+        //myClass.MyMethod(out a);
+
+
     }
 }

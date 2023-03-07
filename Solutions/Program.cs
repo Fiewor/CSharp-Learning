@@ -1,7 +1,7 @@
 ﻿using Solutions;
 using System.Net.NetworkInformation;
 
-public class Program
+public partial class Program
 {
 
     public static void Exercise1()
@@ -428,6 +428,37 @@ public class Program
 
     }
 
+    public class Point
+    {
+        public int X;
+        public int Y;
+
+        public Point(int x, int y)
+        {
+            this.X = x;
+            this.Y = y;
+        }
+
+        // method to move the points to a different location
+        public void Move(int x, int y)
+        {
+            this.X = x;
+            this.Y = y;
+        }
+
+        // overloading
+        public void Move(Point newLocation)
+        {
+            // validate the parameter and always thrw an exception if you get an unexpected parameter type
+            if (newLocation == null)
+                throw new ArgumentNullException("newLocation");
+
+            Move(newLocation.X, newLocation.Y); // call the previous overload instead of repeating the same concept (in this case, setting X and Y)
+            // this.X = newLocation.X;
+            // this.Y = newLocation.Y;
+        }
+    }
+
     private static void Main(string[] args)
     {
         // var numbers = new List<int> { 1, 2, 3, 4, 5 };
@@ -435,15 +466,61 @@ public class Program
         // foreach (var number in smallests)
         //      Console.WriteLine(number); 
 
-        var customer = new Customer(1, "John");
-        Console.WriteLine(customer.Id);
-        Console.WriteLine(customer.Name);
+        //var customer = new Customer(1, "John");
+        //Console.WriteLine(customer.Id);
+        //Console.WriteLine(customer.Name);
 
-        var order = new Order();
-        customer.order.Add(order);
+        //var order = new Order();
+        //customer.Orders.Add(order);
 
         // var person = new Person();
         // person.Name = "John";
         // person.Introduce("Mosh");
+
+
+        //var num = int.Parse("abc"); // throws a FormatExcetion
+        // use a try/catch block to handle exception if using the Parse() method
+
+        int number;
+        var result = int.TryParse("abc", out number); // TryParse() does not throw an exception unlike Parse()
+        // instead it returns a boolean showing whether the conversion was successful or not
+        if(result)
+            Console.WriteLine(number);
+        else
+            Console.WriteLine("Conversion failed.");
+    }
+
+    static void UseParams()
+    {
+        var calculator = new Calculator();
+        Console.WriteLine(calculator.Add(1, 1, 2));
+        Console.WriteLine(calculator.Add(new int[] { 1, 2, 3, 4, 5 }));
+    }
+
+    static void UsePoints()
+    {
+        // adding a global exception handling mechanism
+        // this is better cause the application won't crash in this case
+        // instead it just returns a friendly error
+        try
+        {
+            var point = new Point(10, 30);
+            point.Move(null);
+            Console.WriteLine("Point is at ({0}, {1})", point.X, point.Y);
+
+            point.Move(100, 200);
+            Console.WriteLine("Point is at ({0}, {1})", point.X, point.Y);
+        }
+        catch (Exception)
+        {
+            Console.WriteLine("An unexpected error occured");
+        }
+
+        //var point = new Point(10, 20);
+        //point.Move(new Point(40, 60)); // second overload
+        //Console.WriteLine("Point is at {0} and {1}", point.X, point.Y);
+
+        //point.Move(100, 200); // first overload
+        //Console.WriteLine("Point is at {0} and {1}", point.X, point.Y);
     }
 }
