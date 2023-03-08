@@ -695,19 +695,34 @@ namespace Practice
         // inheritance
         // polymorphism
 
-        // PROPERTIES - a class member that encapsulates a getter/setter for accessing a field
+        // PROPERTIES
+        // - a class member that encapsulates a getter/setter for accessing a field
         //needed to create a getter/setter with less code
-        public class Person
-        {
-            private DateTime _birthdate;
-            public DateTime BirthDate
-            {
-                get { return _birthdate; }
-                set { _birthdate = value; }
+        //public class Person
+        //{
+        //    private DateTime _birthdate;
+        //    public DateTime BirthDate
+        //    {
+        //        get { return _birthdate; }
+        //        set { _birthdate = value; }
 
-                // or using auto-implemented properties
+        //        // or using auto-implemented properties
+        //    }
+        //    public DateTime Birthdate { get; set; } // C# compiler internally creates a private field and implements the get and set methods for us
+        //}
+
+        // INDEXERS
+        // - a way to access elements in a class that represents a list of values
+        // an indexer is nothing but a property so we declare it exactly the way you would declare a property
+
+        public class HttpCookie
+        {
+        // use the 'this' keyword instead of an identifier
+            public string this[string key] // inside the bracket you have the type of indexer
+            {
+                //get { }
+                //set { }
             }
-            public DateTime Birthdate { get; set; } // C# compiler internally creates a private field and implements the get and set methods for us
         }
 
     }

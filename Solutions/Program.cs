@@ -521,10 +521,33 @@ public partial class Program
         }
     }
 
+    public class HttpCookie
+    {
+        private readonly Dictionary<string, string> _dictionary;\
+
+        // expiring property
+        public DateTime Expiry { get; set; }
+
+        public HttpCookie()
+        {
+            _dictionary = new Dictionary<string, string>();
+        }
+
+        public string this[string key]
+        {
+            get { return _dictionary[key];  }
+            set { _dictionary[key] = value; }
+        }
+    }
+
     private static void Main(string[] args)
     {
-        var person = new Person(new DateTime(1998, 10, 27));
-        Console.WriteLine(person.Age);
+        //var person = new Person(new DateTime(1998, 10, 27));
+        //Console.WriteLine(person.Age);
+
+        var cookie = new HttpCookie();
+        cookie["name"] = "Mosh";
+        Console.WriteLine(cookie["name"]); ;
         //var person = new Person();
         //person.SetBirthDate(new DateTime(1982, 1, 1));
         //Console.WriteLine(person.GetBirthDate());
