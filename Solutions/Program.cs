@@ -414,19 +414,14 @@ public partial class Program
         return min;
     }
 
-    public class Person
-    {
-        public string Name;
-        public void Introduce(string to)
-        {
-            Console.WriteLine("Hi {0}, I am {1}", to, Name);
-        }
-    }
-
-    public class Order
-    {
-
-    }
+    //public class Person
+    //{
+    //    public string Name;
+    //    public void Introduce(string to)
+    //    {
+    //        Console.WriteLine("Hi {0}, I am {1}", to, Name);
+    //    }
+    //}
 
     public class Point
     {
@@ -459,8 +454,80 @@ public partial class Program
         }
     }
 
+    public class Customer
+    {
+        public int Id;
+        public string Name;
+        public readonly List<Order> Orders = new List<Order>();
+
+        public Customer(int id)
+        {
+            this.Id = id;
+        }
+
+        public Customer(int id, string name)
+            :this(id)
+        {
+            this.Name = name;
+        }
+
+        public void Promote()
+        {
+            // ...
+        }
+    }
+
+    public class Order
+    { }
+
+    public class Person
+    {
+        // put all auto-implemented properties at the top
+        // followed by the constructors
+        // then the calculated properties at the moment
+
+
+        //private DateTime _birthdate;
+        //public void SetBirthDate(DateTime birthdate)
+        //{
+        //    this._birthdate = birthdate;
+        //}
+        //public DateTime GetBirthDate()
+        //{
+        //    return this._birthdate;
+        //}
+
+        public string Name { get; set; }
+        public string Username { get; set; }
+
+        // the BirthDate property below is an auto-implemented property
+        public DateTime BirthDate { get; private set; } // adding 'private' to the set property makes it so we can only set the birthdate once and it can't be changed
+        // it can only be changed now via a constructor
+
+        public Person(DateTime birthdate)
+        {
+            BirthDate = birthdate;
+        }
+
+        public int Age
+        {
+            get
+            {
+               var timeSpan = DateTime.Today - BirthDate;
+               var years = timeSpan.Days / 365;
+
+               return years;
+            }
+        }
+    }
+
     private static void Main(string[] args)
     {
+        var person = new Person(new DateTime(1998, 10, 27));
+        Console.WriteLine(person.Age);
+        //var person = new Person();
+        //person.SetBirthDate(new DateTime(1982, 1, 1));
+        //Console.WriteLine(person.GetBirthDate());
         // var numbers = new List<int> { 1, 2, 3, 4, 5 };
         // var smallests = GetSmallests(numbers, 3);
         // foreach (var number in smallests)
@@ -481,13 +548,21 @@ public partial class Program
         //var num = int.Parse("abc"); // throws a FormatExcetion
         // use a try/catch block to handle exception if using the Parse() method
 
-        int number;
-        var result = int.TryParse("abc", out number); // TryParse() does not throw an exception unlike Parse()
-        // instead it returns a boolean showing whether the conversion was successful or not
-        if(result)
-            Console.WriteLine(number);
-        else
-            Console.WriteLine("Conversion failed.");
+        //int number;
+        //var result = int.TryParse("abc", out number); // TryParse() does not throw an exception unlike Parse()
+        //// instead it returns a boolean showing whether the conversion was successful or not
+        //if(result)
+        //    Console.WriteLine(number);
+        //else
+        //    Console.WriteLine("Conversion failed.");
+
+        //var customer = new Customer(1);
+        //customer.Orders.Add(new Order());
+        //customer.Orders.Add(new Order());
+
+        //customer.Promote();
+
+        //Console.WriteLine(customer.Orders.Count);
     }
 
     static void UseParams()
