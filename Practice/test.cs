@@ -114,15 +114,15 @@ namespace Practice
             // instead of displaying each character in the console, we can store it in the buffer
             // for (int i = 0; i < passwordLength; i++)
             //{
-                // Console.WriteLine(random.Next());
-                //Console.Write((char)random.Next(97, 122)); // return a random number in the ascii range for lowercase letters THEN cast to integer TO generate a random string 
-                // note: uses Console.Write so that there's no line break
+            // Console.WriteLine(random.Next());
+            //Console.Write((char)random.Next(97, 122)); // return a random number in the ascii range for lowercase letters THEN cast to integer TO generate a random string 
+            // note: uses Console.Write so that there's no line break
 
-                // more readable rewrite of line 120
-                // Console.Write((char)('a' +  random.Next(0, 26)));
-                // this works cause 'a' is represented internally as a number and adding that character to a number RESULTS in a number
+            // more readable rewrite of line 120
+            // Console.Write((char)('a' +  random.Next(0, 26)));
+            // this works cause 'a' is represented internally as a number and adding that character to a number RESULTS in a number
 
-                //buffer[i] = (char)('a' + random.Next(0, 26));
+            //buffer[i] = (char)('a' + random.Next(0, 26));
 
             //}
             var password = new string(buffer);
@@ -171,7 +171,7 @@ namespace Practice
             // null for boolean array
             Array.Clear(numbers, 0, 2);
             //foreach (var n in numbers)
-                //Console.WriteLine(n);
+            //Console.WriteLine(n);
 
             // Copy()
             int[] another = new int[3];
@@ -653,6 +653,62 @@ namespace Practice
         //int a;
         //myClass.MyMethod(out a);
 
+        // FIELDS -  a variable that we declare at the class level
+        // used to store data about the class
+
+        // Initialization
+        public class Cusotmer
+        {
+            //List<Order> Orders;
+
+            // school of thought: only use constructors when you need to initialize fields based on values passed from the outside
+
+            //public Cusotmer()
+            //{
+            //    Orders = new List<Order>();
+            //}
+
+            // rewritten without a constructor as:
+            // List<Order> Orders = new List<Order>();
+            // this way, we're directly initializing the Orders field without the need to create a constuctor;
+            // this approach offers the benefit that we can have multiple constructors and no matter which one is called, the orders field will always be initialized to an empty list
+
+            // Read-only Fields
+            // readonly List<Order> Orders = new List<Order>();
+            // makes sure that the field is only defined once - either directly as done above or in one of the constructors of the class.
+            // used to create some kind of safety in the app
+        }
+
+        // ACCESS MODIFIERS - a way to control access to a class and/or its members
+        //needed to create safety in our programs
+        //public
+        //private
+        //protected
+        //internal
+        //protected internal
+
+        // OOP
+        // encapsulation/information hiding - hiding class-specific details
+        // define fields as private - fields are implementation details
+        // should be named in camelCase starting with an underline
+        // provide getter/setter methods as public - they give access to the fields
+        // inheritance
+        // polymorphism
+
+        // PROPERTIES - a class member that encapsulates a getter/setter for accessing a field
+        //needed to create a getter/setter with less code
+        public class Person
+        {
+            private DateTime _birthdate;
+            public DateTime BirthDate
+            {
+                get { return _birthdate; }
+                set { _birthdate = value; }
+
+                // or using auto-implemented properties
+            }
+            public DateTime Birthdate { get; set; } // C# compiler internally creates a private field and implements the get and set methods for us
+        }
 
     }
 }
