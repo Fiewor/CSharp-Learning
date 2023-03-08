@@ -1,7 +1,4 @@
-﻿using Solutions;
-using System.Net.NetworkInformation;
-
-public partial class Program
+﻿public partial class Program
 {
 
     public static void Exercise1()
@@ -466,7 +463,7 @@ public partial class Program
         }
 
         public Customer(int id, string name)
-            :this(id)
+            : this(id)
         {
             this.Name = name;
         }
@@ -513,17 +510,17 @@ public partial class Program
         {
             get
             {
-               var timeSpan = DateTime.Today - BirthDate;
-               var years = timeSpan.Days / 365;
+                var timeSpan = DateTime.Today - BirthDate;
+                var years = timeSpan.Days / 365;
 
-               return years;
+                return years;
             }
         }
     }
 
     public class HttpCookie
     {
-        private readonly Dictionary<string, string> _dictionary;\
+        private readonly Dictionary<string, string> _dictionary;
 
         // expiring property
         public DateTime Expiry { get; set; }
@@ -535,7 +532,7 @@ public partial class Program
 
         public string this[string key]
         {
-            get { return _dictionary[key];  }
+            get { return _dictionary[key]; }
             set { _dictionary[key] = value; }
         }
     }
