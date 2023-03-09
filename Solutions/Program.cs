@@ -537,14 +537,92 @@
         }
     }
 
+    public class Stopwatch
+    {
+        private DateTime _startTime;
+        private DateTime _stopTime;
+        private bool _isRunning;
+        public void Start()
+        {
+            if (_isRunning)
+                throw new InvalidOperationException("Stopwatch is already running");
+
+           _startTime = DateTime.Now;
+           _isRunning = true;
+        }
+
+        public void Stop ()
+        {
+            if (!_isRunning)
+                throw new InvalidOperationException("Stopwatch is not running");
+
+            _stopTime = DateTime.Now;
+            _isRunning = false;
+        }
+
+        public TimeSpan Duration
+        {
+            get
+            {
+                return _stopTime - _startTime;
+            }
+        }
+    }
+
+    public class Post
+    {
+        private string _title = "";
+        private string _description = "";
+        private DateTime _created = DateTime.Now;
+        private int _vote;
+        public int Vote { get; private set; }
+        public void UpVote()
+        {
+            //upvote a post
+            Vote++;
+        }
+
+        public void DownVote()
+        {
+            Vote--;
+        }
+
+    }
+
     private static void Main(string[] args)
     {
+        // test post class implementation
+        var post = new Post();
+        post.UpVote();
+        post.UpVote();
+        post.UpVote();
+        post.UpVote();
+        post.DownVote();
+        Console.WriteLine("Current vote value: {0}", post.Vote);
+
+        // test stopwatch class implementation
+        //try
+        //{
+        //    var stopwatch = new Stopwatch();
+        //    stopwatch.Start();
+        //    stopwatch.Start();
+        //    for (int i = 0; i < 10000000; i++){}
+        //    stopwatch.Stop();
+        //    Console.WriteLine("Duration is {0}", stopwatch.Duration);
+        //}
+        //catch (Exception)
+        //{
+        //    Console.WriteLine("An error occured");
+        //}
+
         //var person = new Person(new DateTime(1998, 10, 27));
         //Console.WriteLine(person.Age);
 
-        var cookie = new HttpCookie();
-        cookie["name"] = "Mosh";
-        Console.WriteLine(cookie["name"]); ;
+        //var cookie = new HttpCookie();
+        //cookie["name"] = "Mosh";
+        //Console.WriteLine(cookie["name"]); ;
+
+
         //var person = new Person();
         //person.SetBirthDate(new DateTime(1982, 1, 1));
         //Console.WriteLine(person.GetBirthDate());
