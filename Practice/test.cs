@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using System.Collections;
+using System.Text;
 
 
 namespace Practice
@@ -178,8 +179,8 @@ namespace Practice
             Array.Copy(numbers, another, 3);
 
             Console.WriteLine("Effect of Copy()");
-            foreach (var n in another)
-                Console.WriteLine(n);
+            //foreach (var n in another)
+            //    Console.WriteLine(n);
 
             // Sort()
             Array.Sort(numbers);
@@ -220,11 +221,11 @@ namespace Practice
                                                 // in C#, we're not allowed to modify our collection inside a foreach loop
             }
 
-            for (int i = 0; i < numbersList.Count; i++)
-            {
-                if (numbersList[i] == 1)
-                    numbersList.Remove(numbersList[i]);
-            }
+            //for (int i = 0; i < numbersList.Count; i++)
+            //{
+            //    if (numbersList[i] == 1)
+            //        numbersList.Remove(numbersList[i]);
+            //}
 
             foreach (var number in numbersList)
                 Console.WriteLine(number);
@@ -715,15 +716,41 @@ namespace Practice
         // - a way to access elements in a class that represents a list of values
         // an indexer is nothing but a property so we declare it exactly the way you would declare a property
 
-        public class HttpCookie
-        {
-        // use the 'this' keyword instead of an identifier
-            public string this[string key] // inside the bracket you have the type of indexer
-            {
-                //get { }
-                //set { }
-            }
-        }
+        //public class HttpCookie
+        //{
+        //    // use the 'this' keyword instead of an identifier
+        //    public string this[string key] // inside the bracket you have the type of indexer
+        //    {
+        //        //get { }
+        //        //set { }
+        //    }
+        //}
 
+        // upcasting and downcasting
+        //Text text = new Text();
+        //Shape shape = text;
+        //// so we can implicitly convert an object reference like 'text' to its base reference like shape
+
+        //text.Width = 200;
+        //shape.Width = 100;
+
+        //Console.WriteLine("text.Width: {0}", text.Width); // result is 100 because both text and shape are 'references' to the same object, they just have different 'views'
+
+        //StreamReader reader = new StreamReader(new MemoryStream());// you can pass in any object that dervies from a Stream class such as MemoryStream(), FileStream()
+
+        //ArrayList list = new ArrayList();
+        //list.Add(1); // Add method takes an argument of type object, and since object is the parent of all classes in the .NET framework, you can pass any object there
+        //list.Add("Mosh");
+        //list.Add(new Text());
+
+        //    // you should not use the ArrayList class in realworld apps because it's not the type safe kind of list
+
+        //var anotherList = new List<Shape>();
+
+        //Shape shape = new Text(); // at compile time, the type of the shape object is Shape, but at runtime, it's type will be Text
+        // the problem with this is that we won't be able to access the properties defined in the text object
+
+        //Text text = (Text)shape; // so we need to downcast as done here
+        // in this object, we have access to every property in the 'text' class
     }
 }
