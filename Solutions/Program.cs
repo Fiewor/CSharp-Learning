@@ -1,4 +1,7 @@
-﻿public partial class Program
+﻿using Amazon;
+using System.Collections;
+
+public partial class Program
 {
 
     public static void Exercise1()
@@ -451,28 +454,28 @@
         }
     }
 
-    public class Customer
-    {
-        public int Id;
-        public string Name;
-        public readonly List<Order> Orders = new List<Order>();
+    //public class Customer
+    //{
+    //    public int Id;
+    //    public string Name;
+    //    public readonly List<Order> Orders = new List<Order>();
 
-        public Customer(int id)
-        {
-            this.Id = id;
-        }
+    //    public Customer(int id)
+    //    {
+    //        this.Id = id;
+    //    }
 
-        public Customer(int id, string name)
-            : this(id)
-        {
-            this.Name = name;
-        }
+    //    public Customer(int id, string name)
+    //        : this(id)
+    //    {
+    //        this.Name = name;
+    //    }
 
-        public void Promote()
-        {
-            // ...
-        }
-    }
+    //    public void Promote()
+    //    {
+    //        // ...
+    //    }
+    //}
 
     public class Order
     { }
@@ -586,19 +589,54 @@
         {
             Vote--;
         }
+    }
 
+
+    public class GoldCustomer: Customer
+    {
+        public void OfferVoucher()
+        {
+            var rating = this.CalculateRating(excludeOrders: true);
+        }
     }
 
     private static void Main(string[] args)
     {
+
+        var stack = new Stack();
+        stack.Push(1);
+        stack.Push(2);
+        stack.Push(3);
+        Console.WriteLine(stack.Pop());
+        Console.WriteLine(stack.Pop());
+        Console.WriteLine(stack.Pop());
+
+        // Car car = new Car("ansdfondfpanif20932");
+
+
+        //var customer = new Customer();
+        //var dbMigrator = new DbMigrator(new Logger());
+
+        //var logger = new Logger();
+        //var installer = new Installer(logger);
+
+        //dbMigrator.Migrate();
+
+        //installer.Install();
+
+        // testing inheritance example
+        //var text = new Text();
+        //text.Width = 100;
+        //text.Copy();
+
         // test post class implementation
-        var post = new Post();
-        post.UpVote();
-        post.UpVote();
-        post.UpVote();
-        post.UpVote();
-        post.DownVote();
-        Console.WriteLine("Current vote value: {0}", post.Vote);
+        //var post = new Post();
+        //post.UpVote();
+        //post.UpVote();
+        //post.UpVote();
+        //post.UpVote();
+        //post.DownVote();
+        //Console.WriteLine("Current vote value: {0}", post.Vote);
 
         // test stopwatch class implementation
         //try
