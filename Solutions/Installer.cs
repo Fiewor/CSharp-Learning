@@ -10,7 +10,7 @@
 
         public void Install()
         {
-            _logger.Log("We are installing the application.")
+            _logger.Log("We are installing the application.");
         }
     }
 }
