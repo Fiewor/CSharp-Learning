@@ -603,13 +603,22 @@ public partial class Program
     private static void Main(string[] args)
     {
 
-        var stack = new Stack();
-        stack.Push(1);
-        stack.Push(2);
-        stack.Push(3);
-        Console.WriteLine(stack.Pop());
-        Console.WriteLine(stack.Pop());
-        Console.WriteLine(stack.Pop());
+        var shapes = new List<Shape>();
+        shapes.Add(new Shape());
+        shapes.Add(new Rectangle());
+
+        var canvas = new Canvas();
+        canvas.DrawShapes(shapes);
+
+
+        //code test for stack
+        //var stack = new Stack();
+        //stack.Push(1);
+        //stack.Push(2);
+        //stack.Push(3);
+        //Console.WriteLine(stack.Pop());
+        //Console.WriteLine(stack.Pop());
+        //Console.WriteLine(stack.Pop());
 
         // Car car = new Car("ansdfondfpanif20932");
 
