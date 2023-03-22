@@ -600,15 +600,53 @@ public partial class Program
         }
     }
 
+    public abstract class DbConnection
+    {
+        private string ConnectionString { get; set; }
+        public TimeSpan Timeout { get; set; }
+        public DbConnection(string connectionString)
+        {
+            if (String.IsNullOrWhiteSpace(ConnectionString))
+                throw new ArgumentNullException("Connection string cannot be null or white space.");
+
+            ConnectionString = connectionString;
+        }
+        public DbConnection(string connectionString, TimeSpan timeout)
+            :this(connectionString)
+        {
+            Timeout = timeout;
+        }        
+
+        public abstract void OpenConnection();
+        public abstract void CloseConnection();
+    }
+
+    public class SqlConnection : DbConnection
+    {
+        public SqlConnection(string ConnectionString) : base(ConnectionString)
+        {
+        }
+
+        public override void OpenConnection()
+        {
+            Console.WriteLine("Opening connection...");
+        }
+
+        public override void CloseConnection()
+        {
+            Console.WriteLine("Closing connection....");
+        }
+    }
+
     private static void Main(string[] args)
     {
 
-        var shapes = new List<Shape>();
-        shapes.Add(new Shape());
-        shapes.Add(new Rectangle());
+        //var shapes = new List<Shape>();
+        //shapes.Add(new Shape());
+        //shapes.Add(new Rectangle());
 
-        var canvas = new Canvas();
-        canvas.DrawShapes(shapes);
+        //var canvas = new Canvas();
+        //canvas.DrawShapes(shapes);
 
 
         //code test for stack
