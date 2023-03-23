@@ -606,7 +606,7 @@ public partial class Program
         public TimeSpan Timeout { get; set; }
         public DbConnection(string connectionString)
         {
-            if (String.IsNullOrWhiteSpace(ConnectionString))
+            if (String.IsNullOrWhiteSpace(connectionString))
                 throw new ArgumentNullException("Connection string cannot be null or white space.");
 
             ConnectionString = connectionString;
@@ -623,7 +623,22 @@ public partial class Program
 
     public class SqlConnection : DbConnection
     {
-        public SqlConnection(string ConnectionString) : base(ConnectionString)
+        public SqlConnection(string connectionString) : base(connectionString)
+        {
+        }
+
+        public override void OpenConnection()
+        {
+            Console.WriteLine("Opening connection...");
+        }
+
+        public override void CloseConnection()
+        {
+            Console.WriteLine("Closing connection....");
+        }
+    }public class OracleConnection : DbConnection
+    {
+        public OracleConnection(string connectionString) : base(connectionString)
         {
         }
 
@@ -638,9 +653,38 @@ public partial class Program
         }
     }
 
+    public class DbCommand
+    {
+        private string _instruction;
+        private DbConnection _dbConnection;
+        public DbCommand(string instruction, DbConnection dbConnection)
+        {
+            //if (dbConnection)
+            //    throw new ArgumentException("Database connection must be a valid string, not null or white space.");
+
+            if (String.IsNullOrWhiteSpace(instruction))
+                throw new ArgumentException("Instruction cannot be null or white space.");
+
+            _instruction = instruction;
+            _dbConnection = dbConnection;
+        }
+        public void Execute()
+        {
+            Console.WriteLine("Performing {0} on {1}", _instruction, _dbConnection);
+            if (_instruction == "open")
+                _dbConnection.OpenConnection();
+            if (_instruction == "close")
+                _dbConnection.CloseConnection();
+        }
+    }
+
     private static void Main(string[] args)
     {
-
+        var sqlConnection = new SqlConnection("sql connection string");
+        var oracleConnection = new OracleConnection("oracle connection string");
+        var dbCommand = new DbCommand("open", sqlConnection);
+        dbCommand.Execute();
+        
         //var shapes = new List<Shape>();
         //shapes.Add(new Shape());
         //shapes.Add(new Rectangle());
