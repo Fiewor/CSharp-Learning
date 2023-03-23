@@ -477,9 +477,6 @@ public partial class Program
     //    }
     //}
 
-    public class Order
-    { }
-
     public class Person
     {
         // put all auto-implemented properties at the top
@@ -600,90 +597,63 @@ public partial class Program
         }
     }
 
-    public abstract class DbConnection
+    public class Shipment
     {
-        private string ConnectionString { get; set; }
-        public TimeSpan Timeout { get; set; }
-        public DbConnection(string connectionString)
-        {
-            if (String.IsNullOrWhiteSpace(connectionString))
-                throw new ArgumentNullException("Connection string cannot be null or white space.");
-
-            ConnectionString = connectionString;
-        }
-        public DbConnection(string connectionString, TimeSpan timeout)
-            :this(connectionString)
-        {
-            Timeout = timeout;
-        }        
-
-        public abstract void OpenConnection();
-        public abstract void CloseConnection();
+        public float Cost { get; internal set; }
     }
 
-    public class SqlConnection : DbConnection
+    public class Order
     {
-        public SqlConnection(string connectionString) : base(connectionString)
-        {
-        }
-
-        public override void OpenConnection()
-        {
-            Console.WriteLine("Opening connection...");
-        }
-
-        public override void CloseConnection()
-        {
-            Console.WriteLine("Closing connection....");
-        }
-    }public class OracleConnection : DbConnection
+        public float TotalPrice { get; set; }
+        public bool IsShipped { get; set; }
+        public DateTime DatePlaced { get; set; }
+        public Shipment shipment { get; set; }
+    }
+    
+    public class ShippingCalculator
     {
-        public OracleConnection(string connectionString) : base(connectionString)
+        public float CalculateShipping(Order order)
         {
-        }
-
-        public override void OpenConnection()
-        {
-            Console.WriteLine("Opening connection...");
-        }
-
-        public override void CloseConnection()
-        {
-            Console.WriteLine("Closing connection....");
+            //if total cost of order is less $30, the shipping cost is going to be 10% of the total price of the order
+            if (order.TotalPrice < 30f)
+                return order.TotalPrice * 0.1f;
+            // otherwise (total price is $30 or more), give free shipping to customers!
+            return 0;
         }
     }
 
-    public class DbCommand
+    public class OrderProcessor
     {
-        private string _instruction;
-        private DbConnection _dbConnection;
-        public DbCommand(string instruction, DbConnection dbConnection)
+        private readonly ShippingCalculator _shippingCalculator;
+        public OrderProcessor()
         {
-            //if (dbConnection)
-            //    throw new ArgumentException("Database connection must be a valid string, not null or white space.");
-
-            if (String.IsNullOrWhiteSpace(instruction))
-                throw new ArgumentException("Instruction cannot be null or white space.");
-
-            _instruction = instruction;
-            _dbConnection = dbConnection;
+            _shippingCalculator = new ShippingCalculator();
         }
-        public void Execute()
+        public void Process(Order order)
         {
-            Console.WriteLine("Performing {0} on {1}", _instruction, _dbConnection);
-            if (_instruction == "open")
-                _dbConnection.OpenConnection();
-            if (_instruction == "close")
-                _dbConnection.CloseConnection();
-        }
+            //remember defensive programming - ensure arg is indexer valid state
+            if (order.IsShipped)
+                throw new InvalidOperationException("This order is already processed.");
+
+            order.Shipment = new Shipment
+            {
+                Cost = _shippingCalculator.CalculateShipping(order),
+                ShippingDate = DateTime.Today.AddDays(1)
+            };
+        }   
     }
 
     private static void Main(string[] args)
     {
-        var sqlConnection = new SqlConnection("sql connection string");
-        var oracleConnection = new OracleConnection("oracle connection string");
-        var dbCommand = new DbCommand("open", sqlConnection);
-        dbCommand.Execute();
+        var orderProcessor =  new OrderProcessor();
+        var order = new Order { DatePlaced = DateTime.Now, TotalPrice = 100f };
+        orderProcessor.Process(order);
+
+        // testing polymorphism exercises solution
+        //var sqlConnection = new SqlConnection("sql connection string");
+        //var oracleConnection = new OracleConnection("oracle connection string");
+        //var dbCommand = new DbCommand("open", sqlConnection);
+        //dbCommand.Execute();
         
         //var shapes = new List<Shape>();
         //shapes.Add(new Shape());
