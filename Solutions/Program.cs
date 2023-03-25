@@ -479,6 +479,13 @@ public partial class Program
 
     private static void Main(string[] args)
     {
+        // --- interfaces exercise
+        var workflow = new WorkFlow();
+        workflow.AddActivityToWorkflow(new VideoUploadActivity());
+        workflow.AddActivityToWorkflow(new ChangeStatusOfVideoRecordActivity());
+        var workflowengine = new WorkFlowEngine();
+        workflowengine.Run(workflow);
+
         //// --- interfaces and polymorphism
         //var encoder = new VideoEncoder();
         //encoder.RegisterNotificationChannel(new MailNotificationChannel()); // <- here we register the concrete classes
