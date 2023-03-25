@@ -1,5 +1,4 @@
-﻿using Amazon;
-using System.Collections;
+﻿using System.Collections;
 
 public partial class Program
 {
@@ -414,46 +413,6 @@ public partial class Program
         return min;
     }
 
-    //public class Person
-    //{
-    //    public string Name;
-    //    public void Introduce(string to)
-    //    {
-    //        Console.WriteLine("Hi {0}, I am {1}", to, Name);
-    //    }
-    //}
-
-    public class Point
-    {
-        public int X;
-        public int Y;
-
-        public Point(int x, int y)
-        {
-            this.X = x;
-            this.Y = y;
-        }
-
-        // method to move the points to a different location
-        public void Move(int x, int y)
-        {
-            this.X = x;
-            this.Y = y;
-        }
-
-        // overloading
-        public void Move(Point newLocation)
-        {
-            // validate the parameter and always thrw an exception if you get an unexpected parameter type
-            if (newLocation == null)
-                throw new ArgumentNullException("newLocation");
-
-            Move(newLocation.X, newLocation.Y); // call the previous overload instead of repeating the same concept (in this case, setting X and Y)
-            // this.X = newLocation.X;
-            // this.Y = newLocation.Y;
-        }
-    }
-
     //public class Customer
     //{
     //    public int Id;
@@ -481,7 +440,7 @@ public partial class Program
     {
         // put all auto-implemented properties at the top
         // followed by the constructors
-        // then the calculated properties at the moment
+        // then the calculated properties at the bottom
 
 
         //private DateTime _birthdate;
@@ -518,143 +477,33 @@ public partial class Program
         }
     }
 
-    public class HttpCookie
-    {
-        private readonly Dictionary<string, string> _dictionary;
-
-        // expiring property
-        public DateTime Expiry { get; set; }
-
-        public HttpCookie()
-        {
-            _dictionary = new Dictionary<string, string>();
-        }
-
-        public string this[string key]
-        {
-            get { return _dictionary[key]; }
-            set { _dictionary[key] = value; }
-        }
-    }
-
-    public class Stopwatch
-    {
-        private DateTime _startTime;
-        private DateTime _stopTime;
-        private bool _isRunning;
-        public void Start()
-        {
-            if (_isRunning)
-                throw new InvalidOperationException("Stopwatch is already running");
-
-           _startTime = DateTime.Now;
-           _isRunning = true;
-        }
-
-        public void Stop ()
-        {
-            if (!_isRunning)
-                throw new InvalidOperationException("Stopwatch is not running");
-
-            _stopTime = DateTime.Now;
-            _isRunning = false;
-        }
-
-        public TimeSpan Duration
-        {
-            get
-            {
-                return _stopTime - _startTime;
-            }
-        }
-    }
-
-    public class Post
-    {
-        private string _title = "";
-        private string _description = "";
-        private DateTime _created = DateTime.Now;
-        private int _vote;
-        public int Vote { get; private set; }
-        public void UpVote()
-        {
-            //upvote a post
-            Vote++;
-        }
-
-        public void DownVote()
-        {
-            Vote--;
-        }
-    }
-
-
-    public class GoldCustomer: Customer
-    {
-        public void OfferVoucher()
-        {
-            var rating = this.CalculateRating(excludeOrders: true);
-        }
-    }
-
-    public class Shipment
-    {
-        public float Cost { get; internal set; }
-    }
-
-    public class Order
-    {
-        public float TotalPrice { get; set; }
-        public bool IsShipped { get; set; }
-        public DateTime DatePlaced { get; set; }
-        public Shipment shipment { get; set; }
-    }
-    
-    public class ShippingCalculator
-    {
-        public float CalculateShipping(Order order)
-        {
-            //if total cost of order is less $30, the shipping cost is going to be 10% of the total price of the order
-            if (order.TotalPrice < 30f)
-                return order.TotalPrice * 0.1f;
-            // otherwise (total price is $30 or more), give free shipping to customers!
-            return 0;
-        }
-    }
-
-    public class OrderProcessor
-    {
-        private readonly ShippingCalculator _shippingCalculator;
-        public OrderProcessor()
-        {
-            _shippingCalculator = new ShippingCalculator();
-        }
-        public void Process(Order order)
-        {
-            //remember defensive programming - ensure arg is indexer valid state
-            if (order.IsShipped)
-                throw new InvalidOperationException("This order is already processed.");
-
-            order.Shipment = new Shipment
-            {
-                Cost = _shippingCalculator.CalculateShipping(order),
-                ShippingDate = DateTime.Today.AddDays(1)
-            };
-        }   
-    }
-
     private static void Main(string[] args)
     {
-        var orderProcessor =  new OrderProcessor();
-        var order = new Order { DatePlaced = DateTime.Now, TotalPrice = 100f };
-        orderProcessor.Process(order);
+        //// --- interfaces and polymorphism
+        //var encoder = new VideoEncoder();
+        //encoder.RegisterNotificationChannel(new MailNotificationChannel()); // <- here we register the concrete classes
+        //encoder.RegisterNotificationChannel(new SMSNotificationChannel());
+        //encoder.Encode(new VideoEncoder());
 
-        // testing polymorphism exercises solution
+        // --- interfaces and extensibility
+        //var dbMigrator = new DbMigrator(new FileLogger("C:\\Users\\John Fiewor\\OneDrive\\Documents\\log.txt"));
+
+        //var dbMigrator = new DbMigrator(new ConsoleLogger()); // <- in the constructor of DbMigrator, we specified ConsoleLogger which is a concrete implementation of ILogger
+        //dbMigrator.Migrate();
+
+
+        // --- interfaces and testability
+        //var orderProcessor =  new OrderProcessor(); // <- OrderProcessor now takes an argument - an instance of IShippingCalculator
+        //var orderProcessor =  new OrderProcessor(new ShippingCalculator());
+        //var order = new Order { DatePlaced = DateTime.Now, TotalPrice = 100f };
+        //orderProcessor.Process(order);
+
+        // --- testing polymorphism exercises solution
         //var sqlConnection = new SqlConnection("sql connection string");
         //var oracleConnection = new OracleConnection("oracle connection string");
         //var dbCommand = new DbCommand("open", sqlConnection);
         //dbCommand.Execute();
-        
+
         //var shapes = new List<Shape>();
         //shapes.Add(new Shape());
         //shapes.Add(new Rectangle());
