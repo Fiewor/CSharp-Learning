@@ -479,12 +479,27 @@ public partial class Program
 
     private static void Main(string[] args)
     {
+        // --- generics
+        // note that Nullable class already exists under System namespace -> System.Nullable
+        //var number = new Nullable<int>();
+        //Console.WriteLine("Has Value ? " + number.HasValue);
+        //Console.WriteLine("Value: " + number.GetValueOrDefault());
+
+        //var numbers = new GenericList<int>();
+        //numbers.Add(10);
+
+        //var books = new GenericList<Book>();
+        //books.Add(new Book());
+
+        //var dictionary = new GenericDictionary<string, Book>();
+        //dictionary.Add('1234', new Book());
+
         // --- interfaces exercise
-        var workflow = new WorkFlow();
-        workflow.AddActivityToWorkflow(new VideoUploadActivity());
-        workflow.AddActivityToWorkflow(new ChangeStatusOfVideoRecordActivity());
-        var workflowengine = new WorkFlowEngine();
-        workflowengine.Run(workflow);
+        //var workflow = new WorkFlow();
+        //workflow.AddActivityToWorkflow(new VideoUploadActivity());
+        //workflow.AddActivityToWorkflow(new ChangeStatusOfVideoRecordActivity());
+        //var workflowengine = new WorkFlowEngine();
+        //workflowengine.Run(workflow);
 
         //// --- interfaces and polymorphism
         //var encoder = new VideoEncoder();
