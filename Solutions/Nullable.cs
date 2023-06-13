@@ -2,7 +2,7 @@
 {
     public class Nullable<T> where T : struct
     {
-        // remember that in C3, value types cannot be null
+        // remember that in C#, value types cannot be null
         // we can use this class to give our value types the ability to be nullable
         private object _value;
 
@@ -13,7 +13,7 @@
         }
         public Nullable(T value)
         {
-            _value = value; // boxingis done to convert value of type T to an object
+            _value = value; // boxing is done to convert value of type T to an object
         }
 
         public bool HasValue

@@ -22,7 +22,7 @@
             {
                 channel.Send(new Message());
             }
-            // so a different Send method is calle based on the channel - this is how interfaces implement polymorphic behaviour
+            // so a different Send method is called based on the channel - this is how interfaces implement polymorphic behaviour
         }
 
         // we need to tell video encoder about the actual notification channels at runtime

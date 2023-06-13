@@ -477,10 +477,59 @@ public partial class Program
         }
     }
 
+    static void RemoveRedEyeFilter(Photo photo)
+    {
+        Console.WriteLine("Apply RemoveRedEye");
+    }
+
+    // example of predicate method
+    static bool IsCheaperThan10Dollars(Book book)
+    {
+        return book.Price < 10;
+    }
+
     private static void Main(string[] args)
     {
-        // --- generics
-        // note that Nullable class already exists under System namespace -> System.Nullable
+        // ------- lambda expressions --------
+        //() => ... // no argument
+        //x => ... // one argument
+        //(x, y, z) => ... // multiple arguments
+        //Func<int, int> square = number => number * number;
+        // lambda expression has access to all the args passed as well as any variables defined in the method where it(the lambda expression) is defined
+        //Console.WriteLine(square(5));
+
+        //const int factor = 5;
+
+        //Func<int, int> multiplier = n => n * factor;
+
+        //var result = multiplier(10);
+
+        //Console.WriteLine(result);
+
+        var books = new BookRepository().GetBooks();
+
+        //var cheapBooks = books.FindAll(IsCheaperThan10Dollars); // using a method
+        var cheapBooks = books.FindAll(book => book.Price < 10); // using a lambda expression
+
+        foreach (var book in cheapBooks)
+        {
+            Console.WriteLine(book.Title);
+        }
+
+        // ------- delegates --------
+
+        //var processor = new PhotoProcesssor();
+        //var filters = new PhotoFilters();
+        ////PhotoProcesssor.PhotoFilterHandler filterHandler = filters.ApplyBrightness; // - using a custom delegate
+        //Action<Photo> filterHandler = filters.ApplyBrightness; // using the action delegate that comes with .NET
+        //filterHandler += filters.ApplyContrast; // adding another filter (really, adding another pointer)
+        //filterHandler += RemoveRedEyeFilter;
+        //// because we're appending multiple function pointers to our delegate, our delegate is a multicast delegate
+
+        //processor.Process("photo.jpg", filterHandler);
+
+        // ------- generics --------
+        //! note that Nullable class already exists under System namespace -> System.Nullable
         //var number = new Nullable<int>();
         //Console.WriteLine("Has Value ? " + number.HasValue);
         //Console.WriteLine("Value: " + number.GetValueOrDefault());
@@ -494,33 +543,33 @@ public partial class Program
         //var dictionary = new GenericDictionary<string, Book>();
         //dictionary.Add('1234', new Book());
 
-        // --- interfaces exercise
+        // ------- interfaces exercise -------
         //var workflow = new WorkFlow();
         //workflow.AddActivityToWorkflow(new VideoUploadActivity());
         //workflow.AddActivityToWorkflow(new ChangeStatusOfVideoRecordActivity());
         //var workflowengine = new WorkFlowEngine();
         //workflowengine.Run(workflow);
 
-        //// --- interfaces and polymorphism
+        //// ------- interfaces and polymorphism
         //var encoder = new VideoEncoder();
         //encoder.RegisterNotificationChannel(new MailNotificationChannel()); // <- here we register the concrete classes
         //encoder.RegisterNotificationChannel(new SMSNotificationChannel());
         //encoder.Encode(new VideoEncoder());
 
-        // --- interfaces and extensibility
+        // ------- interfaces and extensibility -------
         //var dbMigrator = new DbMigrator(new FileLogger("C:\\Users\\John Fiewor\\OneDrive\\Documents\\log.txt"));
 
         //var dbMigrator = new DbMigrator(new ConsoleLogger()); // <- in the constructor of DbMigrator, we specified ConsoleLogger which is a concrete implementation of ILogger
         //dbMigrator.Migrate();
 
 
-        // --- interfaces and testability
+        // ------- interfaces and testability -------
         //var orderProcessor =  new OrderProcessor(); // <- OrderProcessor now takes an argument - an instance of IShippingCalculator
         //var orderProcessor =  new OrderProcessor(new ShippingCalculator());
         //var order = new Order { DatePlaced = DateTime.Now, TotalPrice = 100f };
         //orderProcessor.Process(order);
 
-        // --- testing polymorphism exercises solution
+        // ------- testing polymorphism exercises solution --------
         //var sqlConnection = new SqlConnection("sql connection string");
         //var oracleConnection = new OracleConnection("oracle connection string");
         //var dbCommand = new DbCommand("open", sqlConnection);
@@ -556,12 +605,12 @@ public partial class Program
 
         //installer.Install();
 
-        // testing inheritance example
+        //------- testing inheritance example -------
         //var text = new Text();
         //text.Width = 100;
         //text.Copy();
 
-        // test post class implementation
+        //------- test post class implementation -------
         //var post = new Post();
         //post.UpVote();
         //post.UpVote();
@@ -570,7 +619,7 @@ public partial class Program
         //post.DownVote();
         //Console.WriteLine("Current vote value: {0}", post.Vote);
 
-        // test stopwatch class implementation
+        //------- test stopwatch class implementation -------
         //try
         //{
         //    var stopwatch = new Stopwatch();

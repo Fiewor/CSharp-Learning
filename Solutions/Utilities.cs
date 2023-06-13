@@ -8,8 +8,8 @@
     // where T : new() => T is an object that has a default constructor
 
     // you can create a generic method inside a non-generic class
-    public class Utilities<T> where T : IComparable, new() //<- moved template here instead so need to have it in the method. This is one type of constraint
-        // also add a constrainttoa default constructor i.e. new()
+    public class Utilities<T> where T : IComparable, new() //<- moved template here instead, so need to have it in the method. This is one type of constraint
+        // also add a constraint to a default constructor i.e. new()
     {
         //public int Max(int a, int b) 
         public int Max(int a, int b)
