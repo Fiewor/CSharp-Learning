@@ -10,11 +10,11 @@
             if (_isRunning)
                 throw new InvalidOperationException("Stopwatch is already running");
 
-           _startTime = DateTime.Now;
-           _isRunning = true;
+            _startTime = DateTime.Now;
+            _isRunning = true;
         }
 
-        public void Stop ()
+        public void Stop()
         {
             if (!_isRunning)
                 throw new InvalidOperationException("Stopwatch is not running");

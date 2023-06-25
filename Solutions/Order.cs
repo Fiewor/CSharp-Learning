@@ -11,6 +11,6 @@
         {
             get { return Shipment != null; }
         }
-        
+
     }
 }

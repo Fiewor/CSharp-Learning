@@ -12,12 +12,12 @@
             ConnectionString = connectionString;
         }
         public DbConnection(string connectionString, TimeSpan timeout)
-            :this(connectionString)
+            : this(connectionString)
         {
             Timeout = timeout;
-        }        
+        }
 
         public abstract void OpenConnection();
         public abstract void CloseConnection();
     }
-    }
+}

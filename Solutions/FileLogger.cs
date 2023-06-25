@@ -15,15 +15,15 @@ public partial class Program
         public void LogError(string message)
         {
             Log(message, "ERROR");
-        } 
+        }
 
         public void LogInfo(string message)
         {
             Log(message, "INFO");
             // an easier way to do this is to use an immigration
         }
-        
-        public void Log(string message, string messageType) 
+
+        public void Log(string message, string messageType)
         {
             // create a streamwriter for writing data to a file
 

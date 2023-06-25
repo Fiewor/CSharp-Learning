@@ -24,4 +24,4 @@
                 _dbConnection.CloseConnection();
         }
     }
-    }
+}

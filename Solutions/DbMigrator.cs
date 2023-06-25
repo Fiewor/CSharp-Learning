@@ -7,17 +7,17 @@
         private readonly ILogger logger;
 
         public DbMigrator(ILogger logger) // this technique is called dependency injection - which means, in the constructor, you're specifying the dependencies for a class
-            // later, in the Main method, we'll specify the concrete class that implements that interface
+                                          // later, in the Main method, we'll specify the concrete class that implements that interface
         {
             this.logger = logger;
         }
         public void Migrate()
         {
             logger.LogInfo("Migration started at " + DateTime.Now);
-            
+
             logger.LogInfo("Migration finished at " + DateTime.Now);
         }
 
-        
+
     }
 }

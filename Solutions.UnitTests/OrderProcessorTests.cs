@@ -20,20 +20,20 @@ namespace Solutions.UnitTests
         }
 
         [TestMethod]
-        public void Process_OrderIsNotShipped_SholdSetTheShipmentPropertyOfTheOrder()
+        public void Process_OrderIsNotShipped_ShouldSetTheShipmentPropertyOfTheOrder()
         {
             var orderProcessor = new OrderProcessor(new FakeShippingCalculator());
             var order = new Order();
 
             orderProcessor.Process(order);
 
-            Assert.IsTrue(order.IsShipped)+++++++
+            Assert.IsTrue(order.IsShipped);
             Assert.AreEqual(1, order.Shipment.Cost);
             Assert.AreEqual(DateTime.Today.AddDays(1), order.Shipment.Shipment.ShippingDate);
         }
     }
 
-    // we need to pass an arument to OrderProcessor which is the IShippingCalculator
+    // we need to pass an argument to OrderProcessor which is the IShippingCalculator
     // because we need an object that's always working, we're not going to pass the original ShippingCalculator - cause we're trying to isolate that OrderProcessor
     // so we'll create a FakeShippingCalculator
 
