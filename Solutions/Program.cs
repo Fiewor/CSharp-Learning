@@ -1,6 +1,4 @@
-﻿using System.Collections;
-
-public partial class Program
+﻿public partial class Program
 {
 
     public static void Exercise1()
@@ -488,8 +486,70 @@ public partial class Program
         return book.Price < 10;
     }
 
+    public static int MaxLevelSum(TreeNode root)
+    {
+        Queue<TreeNode> q = new Queue<TreeNode>();
+        q.Enqueue(root);
+        int level = 1, maxLevel = 1, maxSum = int.MaxValue;
+
+        while (q.Count > 0)
+        {
+            TreeNode node = q.Dequeue();
+            int nodeSize = q.Count, levelSum = 0;
+
+            for (int i = 0; i < nodeSize; i++)
+            {
+                levelSum += node.val;
+
+                if (node.left != null) q.Enqueue(node.left);
+                if (node.right != null) q.Enqueue(node.right);
+            }
+            if (levelSum > maxSum)
+            {
+                (maxSum, maxLevel) = (levelSum, level);
+            }
+            level++;
+        }
+        return maxLevel;
+    }
+
+    public class Video
+    {
+        public string Title { get; set; }
+    }
+
     private static void Main(string[] args)
     {
+        var video = new Video() { Title = "Video 1" };
+        var videoEncoder = new VideoEncoder(); // publisher
+        // now we need to subscribe this mail service to the VideoEncoded event of the VideoEncoder
+        var mailService = new MailService(); // subscriber
+        var messageService = new MessageService(); // new subscriber
+
+        // do the subscription
+        videoEncoder.VideoEncoded += mailService.OnVideoEncoded; // register an handler for that event 
+        // the handler is that method in the MailService
+
+        // Behind the scene, VideoEncoded is a list of pointers to methods.
+        // when the VideoEncoded wants to publish an event, it looks at that list (VideoEncoder.cs, line 24), and if it's not empty, that means someone has subscribed to that event, which means we have a pointer to an event handler method and we'll cal it (VideoEncoder.cs, line 25)
+
+        videoEncoder.VideoEncoded += messageService.OnVideoEncoded;
+
+        // note that we need to do the subscription before calling the Encode method, otherwise the subscriber will not be notified about the event
+        videoEncoder.Encode(video);
+
+
+
+
+        //TreeNode root = new TreeNode(1);
+        //root.left = new TreeNode(7);
+        //root.right = new TreeNode(0);
+        //root.left.left = new TreeNode(7);
+        //root.left.right = new TreeNode(-8);
+
+        //// Call the MaxLevelSum function
+        //int maxSumLevel = MaxLevelSum(root);
+        //Console.WriteLine(maxSumLevel);
         // ------- lambda expressions --------
         //() => ... // no argument
         //x => ... // one argument
@@ -506,15 +566,15 @@ public partial class Program
 
         //Console.WriteLine(result);
 
-        var books = new BookRepository().GetBooks();
+        //var books = new BookRepository().GetBooks();
 
-        //var cheapBooks = books.FindAll(IsCheaperThan10Dollars); // using a method
-        var cheapBooks = books.FindAll(book => book.Price < 10); // using a lambda expression
+        ////var cheapBooks = books.FindAll(IsCheaperThan10Dollars); // using a method
+        //var cheapBooks = books.FindAll(book => book.Price < 10); // using a lambda expression
 
-        foreach (var book in cheapBooks)
-        {
-            Console.WriteLine(book.Title);
-        }
+        //foreach (var book in cheapBooks)
+        //{
+        //    Console.WriteLine(book.Title);
+        //}
 
         // ------- delegates --------
 
