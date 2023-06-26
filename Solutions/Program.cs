@@ -1,4 +1,20 @@
-﻿public partial class Program
+﻿using System.Net.NetworkInformation;
+
+public static class StringExtensions
+{
+    public static string Shorten(this String str, int numberOfWords)
+    {
+        if (numberOfWords < 0)
+            throw new ArgumentOutOfRangeException("numberOfWords should be greater than or equal to 0.");
+        if (numberOfWords == 0) return "";
+        var words = str.Split(' ');
+        if (words.Length < numberOfWords) return str;
+
+        return String.Join(" ", words.Take(numberOfWords)) + "..."; // take is an extension method that can be applied on any class that inmplements IEnumerabele interface (in this case, the string array)
+    }
+}
+
+public partial class Program
 {
 
     public static void Exercise1()
@@ -520,23 +536,33 @@
 
     private static void Main(string[] args)
     {
-        var video = new Video() { Title = "Video 1" };
-        var videoEncoder = new VideoEncoder(); // publisher
-        // now we need to subscribe this mail service to the VideoEncoded event of the VideoEncoder
-        var mailService = new MailService(); // subscriber
-        var messageService = new MessageService(); // new subscriber
+        // ------- extension methods ------- //
+        string post = "This is a supposedly long blog post about me and you and me and you and me...";
+        var shortenedPost = post.Shorten(5);
 
-        // do the subscription
-        videoEncoder.VideoEncoded += mailService.OnVideoEncoded; // register an handler for that event 
-        // the handler is that method in the MailService
+        IEnumerable<int> numbers = new List<int>() { 1, 5, 3, 10, 2, 18 } ;
+        var max = numbers.Max();
 
-        // Behind the scene, VideoEncoded is a list of pointers to methods.
-        // when the VideoEncoded wants to publish an event, it looks at that list (VideoEncoder.cs, line 24), and if it's not empty, that means someone has subscribed to that event, which means we have a pointer to an event handler method and we'll cal it (VideoEncoder.cs, line 25)
+        Console.WriteLine(max);
 
-        videoEncoder.VideoEncoded += messageService.OnVideoEncoded;
+        // ------- events and delegates --------- //
+        //var video = new Video() { Title = "Video 1" };
+        //var videoEncoder = new VideoEncoder(); // publisher
+        //// now we need to subscribe this mail service to the VideoEncoded event of the VideoEncoder
+        //var mailService = new MailService(); // subscriber
+        //var messageService = new MessageService(); // new subscriber
 
-        // note that we need to do the subscription before calling the Encode method, otherwise the subscriber will not be notified about the event
-        videoEncoder.Encode(video);
+        //// do the subscription
+        //videoEncoder.VideoEncoded += mailService.OnVideoEncoded; // register an handler for that event 
+        //// the handler is that method in the MailService
+
+        //// Behind the scene, VideoEncoded is a list of pointers to methods.
+        //// when the VideoEncoded wants to publish an event, it looks at that list (VideoEncoder.cs, line 24), and if it's not empty, that means someone has subscribed to that event, which means we have a pointer to an event handler method and we'll cal it (VideoEncoder.cs, line 25)
+
+        //videoEncoder.VideoEncoded += messageService.OnVideoEncoded;
+
+        //// note that we need to do the subscription before calling the Encode method, otherwise the subscriber will not be notified about the event
+        //videoEncoder.Encode(video);
 
 
 
